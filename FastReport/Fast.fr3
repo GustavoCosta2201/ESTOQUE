@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="6.9.3" DataSet="dsRelatorio" DataSetName="frxDBDataset1" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="167935" PreviewOptions.Zoom="1" PrintOptions.Printer="Default" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="44839,5530206597" ReportOptions.Description.Text="" ReportOptions.LastChange="44839,5540530787" ScriptLanguage="PascalScript" ScriptText.Text="begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSet="dsRelatorio" DataSetName="frxDBDataset1"/>
+  </Datasets>
+  <TfrxDataPage Name="Data" HGuides.Text="" VGuides.Text="" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="Page1" HGuides.Text="" VGuides.Text="" PaperWidth="210" PaperHeight="297" PaperSize="9" LeftMargin="10" RightMargin="10" TopMargin="10" BottomMargin="10" ColumnWidth="0" ColumnPositions.Text="" Frame.Typ="0" MirrorMode="0">
+    <TfrxReportTitle Name="ReportTitle1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="196,53556" Left="0" Top="18,89765" Width="718,1107">
+      <TfrxMemoView Name="Memo1" Align="baWidth" AllowVectorExport="True" Left="0" Top="68,03154" Width="718,1107" Height="60,47248" Font.Charset="1" Font.Color="0" Font.Height="-21" Font.Name="Arial" Font.Style="1" Frame.Typ="0" HAlign="haCenter" ParentFont="False" Text="TESTE"/>
+      <TfrxMemoView Name="frxDBDataset1ID_CLIENTE" IndexTag="1" AllowVectorExport="True" Left="540,47279" Top="22,67718" Width="79,37013" Height="18,89765" DataField="ID_CLIENTE" DataSet="dsRelatorio" DataSetName="frxDBDataset1" Font.Charset="1" Font.Color="0" Font.Height="-21" Font.Name="Arial" Font.Style="1" Frame.Typ="0" HAlign="haCenter" ParentFont="False" Text="[frxDBDataset1.&#34;ID_CLIENTE&#34;]"/>
+    </TfrxReportTitle>
+  </TfrxReportPage>
+</TfrxReport>

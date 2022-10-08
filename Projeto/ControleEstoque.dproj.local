@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2022/09/27 10:24:24.000.413,=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
+    <Transaction>2022/09/27 10:25:34.000.031,C:\ESTOQUE\Forms\uPesqProduto.pas=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
+    <Transaction>2022/09/27 10:25:34.000.031,C:\ESTOQUE\Forms\uPesqProduto.dfm=C:\ESTOQUE\Projeto\Unit1.dfm</Transaction>
+    <Transaction>2022/09/28 16:16:40.000.192,=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
+    <Transaction>2022/09/28 16:19:58.000.334,C:\ESTOQUE\Forms\uMovimentoPadrao.dfm=C:\ESTOQUE\Projeto\Unit1.dfm</Transaction>
+    <Transaction>2022/09/28 16:19:58.000.334,C:\ESTOQUE\Forms\uMovimentoPadrao.pas=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
+    <Transaction>2022/09/28 16:49:19.000.888,=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
+    <Transaction>2022/09/28 16:50:15.000.997,C:\ESTOQUE\Forms\uCompra01.pas=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
+    <Transaction>2022/09/28 16:50:15.000.997,C:\ESTOQUE\Forms\uCompra01.dfm=C:\ESTOQUE\Projeto\Unit1.dfm</Transaction>
+    <Transaction>2022/10/03 10:16:19.000.871,=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
+    <Transaction>2022/10/03 10:21:22.000.746,C:\ESTOQUE\Forms\uPesqCompra.pas=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
+    <Transaction>2022/10/03 10:21:22.000.746,C:\ESTOQUE\Forms\uPesqCompra.dfm=C:\ESTOQUE\Projeto\Unit1.dfm</Transaction>
+    <Transaction>2022/10/03 14:00:54.000.560,=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
+    <Transaction>2022/10/03 14:02:06.000.248,C:\ESTOQUE\Projeto\Unit1.pas=C:\ESTOQUE\ReportBuilder Test\ReportBuilderTest.pas</Transaction>
+    <Transaction>2022/10/03 14:02:06.000.248,C:\ESTOQUE\Projeto\Unit1.dfm=C:\ESTOQUE\ReportBuilder Test\ReportBuilderTest.dfm</Transaction>
+    <Transaction>2022/10/07 21:46:58.000.456,=C:\ESTOQUE\Projeto\ABOUT.pas</Transaction>
+    <Transaction>2022/10/07 21:51:07.000.610,C:\ESTOQUE\Forms\uAbout.pas=C:\ESTOQUE\Projeto\ABOUT.pas</Transaction>
+    <Transaction>2022/10/07 21:51:07.000.610,C:\ESTOQUE\Forms\uAbout.dfm=C:\ESTOQUE\Projeto\ABOUT.dfm</Transaction>
+    <Transaction>2022/10/07 21:55:24.000.501,=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
+    <Transaction>2022/10/07 21:56:47.000.485,C:\ESTOQUE\Forms\uLogin.pas=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
+    <Transaction>2022/10/07 21:56:47.000.485,C:\ESTOQUE\Forms\uLogin.dfm=C:\ESTOQUE\Projeto\Unit1.dfm</Transaction>
+  </Transactions>
+</BorlandProject>
