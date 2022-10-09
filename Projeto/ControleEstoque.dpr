@@ -21,7 +21,8 @@ uses
   uPesqCompra in '..\Forms\uPesqCompra.pas' {FrmPesqCompra},
   ReportBuilderTest in '..\ReportBuilder Test\ReportBuilderTest.pas' {ReportBuilder},
   uAbout in '..\Forms\uAbout.pas' {FrmAboutBox},
-  uLogin in '..\Forms\uLogin.pas' {FrmLogin};
+  uLogin in '..\Forms\uLogin.pas' {FrmLogin},
+  uTrocarSenha in '..\Forms\uTrocarSenha.pas' {FrmTrocaSenha};
 
 {$R *.res}
 

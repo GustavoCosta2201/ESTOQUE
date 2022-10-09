@@ -165,7 +165,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
-  Vcl.ComCtrls;
+  Vcl.ComCtrls, dxGDIPlusClasses;
 
 type
   TFrmLogin = class(TForm)
@@ -178,11 +178,13 @@ type
     Bevel1: TBevel;
     Panel1: TPanel;
     StatusBar1: TStatusBar;
+    btTrocarSenha: TBitBtn;
     procedure btCancelarClick(Sender: TObject);
-    procedure DBSenhaKeyPress(Sender: TObject; var Key: Char);
     procedure FormShow(Sender: TObject);
     procedure btEntrarClick(Sender: TObject);
     procedure AbrirTelaPrincipal();
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure btTrocarSenhaClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -198,7 +200,7 @@ implementation
 
 {$R *.dfm}
 
-uses U_DM, U_Principal;
+uses U_DM, U_Principal, uTrocarSenha;
 
 procedure TFrmLogin.AbrirTelaPrincipal;
 begin
@@ -248,9 +250,21 @@ begin
         Statusbar1.Panels[0].Text:='Tentativas:  ' + IntToStr(vCount)  + '/3';
 end;
 
-procedure TFrmLogin.DBSenhaKeyPress(Sender: TObject; var Key: Char);
+procedure TFrmLogin.btTrocarSenhaClick(Sender: TObject);
 begin
-    //Fazer o Enter tem a função do tab
+    FrmTrocaSenha:=TfrmTrocaSenha.create(self);
+    FrmTrocaSenha.ShowModal;
+    try
+
+    finally
+      FreeAndNil(FrmTrocaSenha);
+
+    end;
+end;
+
+procedure TFrmLogin.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+      //Fazer o Enter tem a função do tab
     if key = #13 then
       begin
         key:=#0;
