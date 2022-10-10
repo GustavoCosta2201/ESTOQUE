@@ -4395,6 +4395,7 @@ object Frm_Principal: TFrm_Principal
         0000000000000000000000000000000000000000000000000000}
       Layout = blGlyphTop
       ParentFont = False
+      OnClick = SpeedButton8Click
     end
     object SpeedButton9: TSpeedButton
       Left = 948

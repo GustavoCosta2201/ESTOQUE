@@ -76,6 +76,7 @@ type
     procedure Informaes1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
+    procedure SpeedButton8Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -91,7 +92,7 @@ implementation
 
 uses U_Usuario, U_Empresa, U_Clientes, U_Fornecedor, U_Produto, U_FormaPgto,
   uCompra01, ReportBuilderTest, uPesqUsuarios, uPesqFornecedor, uPesqCliente,
-  uPesqProduto, uPesqCompra, uAbout, U_DM, uLogin;
+  uPesqProduto, uPesqCompra, uAbout, U_DM, uLogin, uVenda;
 
 procedure TFrm_Principal.AbrirTelaUsuario;
 begin
@@ -360,6 +361,18 @@ end;
 procedure TFrm_Principal.SpeedButton7Click(Sender: TObject);
 begin
   AbrirTelaCompra01;
+end;
+
+procedure TFrm_Principal.SpeedButton8Click(Sender: TObject);
+begin
+  FrmVenda:= TFrmVenda.create(self);
+  FrmVenda.ShowModal;
+  try
+
+  finally
+    FreeAndNil(FrmVenda);
+
+  end;
 end;
 
 procedure TFrm_Principal.SpeedButton9Click(Sender: TObject);

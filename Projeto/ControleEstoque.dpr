@@ -22,7 +22,8 @@ uses
   ReportBuilderTest in '..\ReportBuilder Test\ReportBuilderTest.pas' {ReportBuilder},
   uAbout in '..\Forms\uAbout.pas' {FrmAboutBox},
   uLogin in '..\Forms\uLogin.pas' {FrmLogin},
-  uTrocarSenha in '..\Forms\uTrocarSenha.pas' {FrmTrocaSenha};
+  uTrocarSenha in '..\Forms\uTrocarSenha.pas' {FrmTrocaSenha},
+  uVenda in '..\Forms\uVenda.pas' {FrmVenda};
 
 {$R *.res}
 
@@ -32,5 +33,6 @@ begin
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TFrmLogin, FrmLogin);
+  Application.CreateForm(TFrmVenda, FrmVenda);
   Application.Run;
 end.
