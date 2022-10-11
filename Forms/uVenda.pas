@@ -97,6 +97,7 @@ type
     procedure DBIDProdutoExit(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btDeletarClick(Sender: TObject);
+    procedure bt_PesquisarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -110,7 +111,7 @@ implementation
 
 {$R *.dfm}
 
-uses U_DM;
+uses U_DM, uPesqVendas;
 
 procedure TFrmVenda.BitBtn2Click(Sender: TObject);
   var vProx: Integer;
@@ -272,6 +273,19 @@ begin
  DBValor.Text:=InttoStr(0);
  DBParcela.Text:=IntToStr(0);
  DBID_Cliente.SetFocus;
+
+end;
+
+procedure TFrmVenda.bt_PesquisarClick(Sender: TObject);
+begin
+ FrmPesqVendas:=TfrmPesqVendas.Create(self);
+ FrmPesqVendas.ShowModal;
+ try
+
+ finally
+  FreeAndNil(FrmPesqVendas);
+
+ end;
 
 end;
 

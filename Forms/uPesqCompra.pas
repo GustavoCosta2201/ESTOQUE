@@ -74,7 +74,6 @@ begin
   + 'INNER JOIN FORMA_PGTO C ON C.ID_FORMA_PGTO = A.ID_FORMA_PGTO  ');
 
   //Opções de Pesquisa
-
   case ComboBox1.ItemIndex of
   0:begin         //PESQUISA POR CÓDIGO
     qrPesquisa.SQL.Add('WHERE A.ID_COMPRA =:PID_PRODUTO');      //Cria o Parâmetro

@@ -10,9 +10,13 @@ inherited FrmVenda: TFrmVenda
       Top = 9
       ExplicitTop = 9
     end
+    inherited bt_Pesquisar: TBitBtn
+      OnClick = bt_PesquisarClick
+    end
   end
   inherited Panel2: TPanel
     Top = 562
+    ExplicitTop = 562
     inherited DBNavigator1: TDBNavigator
       Left = 631
       Top = 6
@@ -32,7 +36,6 @@ inherited FrmVenda: TFrmVenda
   end
   inherited Panel3: TPanel
     Caption = 'SUBTOTAL'
-    ExplicitTop = 58
     object Label1: TLabel
       Left = 56
       Top = 3
@@ -257,6 +260,7 @@ inherited FrmVenda: TFrmVenda
   end
   inherited Panel4: TPanel
     Top = 479
+    ExplicitTop = 479
     object Label10: TLabel
       Left = 32
       Top = 24
@@ -411,7 +415,7 @@ inherited FrmVenda: TFrmVenda
       ExplicitLeft = 4
       ExplicitTop = 24
       ExplicitWidth = 1100
-      ExplicitHeight = 256
+      ExplicitHeight = 258
       inherited DBGrid1: TDBGrid
         Height = 258
         Columns = <
@@ -428,7 +432,6 @@ inherited FrmVenda: TFrmVenda
           item
             Expanded = False
             FieldName = 'ID_PRODUTO'
-            Width = 64
             Visible = True
           end
           item
@@ -439,7 +442,6 @@ inherited FrmVenda: TFrmVenda
           item
             Expanded = False
             FieldName = 'QTDE'
-            Width = 64
             Visible = True
           end
           item
@@ -450,13 +452,11 @@ inherited FrmVenda: TFrmVenda
           item
             Expanded = False
             FieldName = 'TOTAL_ITEM'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'DESCONTO'
-            Width = 64
             Visible = True
           end>
       end
@@ -466,7 +466,7 @@ inherited FrmVenda: TFrmVenda
       ExplicitLeft = 4
       ExplicitTop = 24
       ExplicitWidth = 1100
-      ExplicitHeight = 256
+      ExplicitHeight = 258
       inherited DBGrid3: TDBGrid
         Height = 258
         DataSource = dsContaReceber
