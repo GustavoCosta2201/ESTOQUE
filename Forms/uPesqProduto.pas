@@ -66,14 +66,14 @@ qrPesquisa.Close;  //Fecha a Query
   qrPesquisa.SQL.Clear; //Limpa o SQL
   qrPesquisa.SQL.Add('SELECT ID_PRODUTO, '
   + ' A.DESCRICAO, '
-  + ' A.VL_CUSTO,'
+  + ' A.VL_CUSTO, '
   + ' A.VL_VENDA,'
   + ' A.ESTOQUE,'
   + ' A.ESTOQUE_MIN,'
   + ' A.UNIDADE,'
   + ' A.ID_FORNECEDOR,'
   + ' B.NOME,'
-  + ' A.CADASTRO'
+  + ' A.CADASTRO   '
   + ' FROM PRODUTO A  '
   + ' INNER JOIN FORNECEDOR B ON B.ID_FORNECEDOR = A.ID_FORNECEDOR'); //Adiciona o SQL
 

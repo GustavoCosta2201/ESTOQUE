@@ -1,6 +1,7 @@
 inherited FrmFormasPgto: TFrmFormasPgto
   Caption = 'Cadastro de Forma de Pagamento'
   ClientHeight = 314
+  Position = poScreenCenter
   ExplicitHeight = 343
   PixelsPerInch = 96
   TextHeight = 13
@@ -30,13 +31,23 @@ inherited FrmFormasPgto: TFrmFormasPgto
   end
   inherited Panel2: TPanel
     Top = 265
-    ExplicitTop = 254
+    ExplicitTop = 265
     inherited DBNavigator1: TDBNavigator
       Left = 318
       Top = 264
       Hints.Strings = ()
       ExplicitLeft = 318
       ExplicitTop = 264
+    end
+    object DBNavigator2: TDBNavigator
+      Left = 294
+      Top = 5
+      Width = 344
+      Height = 40
+      DataSource = dsPadrao
+      VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+      Align = alCustom
+      TabOrder = 1
     end
   end
   object DBForma: TDBEdit [5]

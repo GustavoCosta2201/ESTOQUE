@@ -21,7 +21,8 @@ type
     DBDescricao: TDBEdit;
     Label3: TLabel;
     DBCadastro: TDBEdit;
-    procedure bt_NovoClick(Sender: TObject);
+    DBNavigator2: TDBNavigator;
+    procedure btNovoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,7 +36,7 @@ implementation
 
 {$R *.dfm}
 
-procedure TFrmFormasPgto.bt_NovoClick(Sender: TObject);
+procedure TFrmFormasPgto.btNovoClick(Sender: TObject);
 begin
   inherited;
   DBCadastro.Text:=datetostr(now);

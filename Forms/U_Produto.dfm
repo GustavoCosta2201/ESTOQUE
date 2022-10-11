@@ -94,20 +94,20 @@ inherited FrmProduto: TFrmProduto
     ParentFont = False
   end
   object Label9: TLabel [10]
-    Left = 199
-    Top = 216
-    Width = 86
-    Height = 13
-    Caption = 'ID_FORNECEDOR'
-    FocusControl = DBIDFornecedor
-  end
-  object Label10: TLabel [11]
-    Left = 344
-    Top = 216
+    Left = 350
+    Top = 219
     Width = 29
     Height = 13
     Caption = 'NOME'
-    FocusControl = DBNome
+    FocusControl = DBEdit1
+  end
+  object Label10: TLabel [11]
+    Left = 198
+    Top = 219
+    Width = 86
+    Height = 13
+    Caption = 'ID_FORNECEDOR'
+    FocusControl = DBEdit2
   end
   inherited Panel1: TPanel
     TabOrder = 8
@@ -210,21 +210,21 @@ inherited FrmProduto: TFrmProduto
       'UN')
     TabOrder = 7
   end
-  object DBIDFornecedor: TDBEdit [22]
-    Left = 189
+  object DBEdit1: TDBEdit [22]
+    Left = 350
+    Top = 235
+    Width = 400
+    Height = 21
+    DataField = 'NOME'
+    DataSource = dsPadrao
+    TabOrder = 10
+  end
+  object DBEdit2: TDBEdit [23]
+    Left = 198
     Top = 235
     Width = 134
     Height = 21
     DataField = 'ID_FORNECEDOR'
-    DataSource = dsPadrao
-    TabOrder = 10
-  end
-  object DBNome: TDBEdit [23]
-    Left = 344
-    Top = 235
-    Width = 500
-    Height = 21
-    DataField = 'NOME'
     DataSource = dsPadrao
     TabOrder = 11
   end
@@ -232,21 +232,22 @@ inherited FrmProduto: TFrmProduto
     UpdateOptions.AssignedValues = [uvFetchGeneratorsPoint, uvGeneratorName]
     UpdateOptions.FetchGeneratorsPoint = gpNone
     SQL.Strings = (
-      'SELECT A.ID_PRODUTO,'
-      '       A.DESCRICAO,'
-      '       A.VL_CUSTO,'
-      '       A.VL_VENDA,'
-      '       A.ESTOQUE,'
-      '       A.ESTOQUE_MIN,'
-      '       A.UNIDADE,'
-      '       A.ID_FORNECEDOR,      '
-      '       A.CADASTRO,'
+      'SELECT A.ID_PRODUTO ,'
+      '       A.DESCRICAO ,'
+      '       A.VL_CUSTO ,'
+      '       A.VL_VENDA ,'
+      '       A.ESTOQUE ,'
+      '       A.ESTOQUE_MIN ,'
+      '       A.UNIDADE ,'
+      '       A.ID_FORNECEDOR ,      '
+      '       A.CADASTRO ,'
       '       B.NOME'
+      ''
       'FROM PRODUTO A, FORNECEDOR B'
       'WHERE A.ID_FORNECEDOR = B.ID_FORNECEDOR'
       '')
-    Left = 904
-    Top = 120
+    Left = 888
+    Top = 128
     object Q_padraoDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
       Origin = 'DESCRICAO'
@@ -313,9 +314,46 @@ inherited FrmProduto: TFrmProduto
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
+    object Q_padraoFORNECEDOR: TStringField
+      FieldKind = fkLookup
+      FieldName = 'FORNECEDOR'
+      LookupDataSet = qrFornecedorProduto
+      LookupKeyFields = 'ID_FORNECEDOR'
+      LookupResultField = 'NOME'
+      KeyFields = 'ID_FORNECEDOR'
+      Size = 100
+      Lookup = True
+    end
   end
   inherited dsPadrao: TDataSource
-    Left = 904
-    Top = 168
+    Left = 888
+    Top = 184
+  end
+  object qrFornecedorProduto: TFDQuery
+    Connection = DM.Conexao
+    SQL.Strings = (
+      'SELECT '
+      'ID_FORNECEDOR,'
+      'NOME'
+      ' FROM FORNECEDOR')
+    Left = 968
+    Top = 120
+    object qrFornecedorProdutoID_FORNECEDOR: TIntegerField
+      FieldName = 'ID_FORNECEDOR'
+      Origin = 'ID_FORNECEDOR'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object qrFornecedorProdutoNOME: TStringField
+      FieldName = 'NOME'
+      Origin = 'NOME'
+      Required = True
+      Size = 100
+    end
+  end
+  object dsFornecedorProduto: TDataSource
+    DataSet = qrFornecedorProduto
+    Left = 968
+    Top = 176
   end
 end

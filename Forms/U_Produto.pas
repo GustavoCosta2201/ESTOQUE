@@ -40,10 +40,15 @@ type
     Q_padraoID_PRODUTO: TIntegerField;
     Label11: TLabel;
     Label12: TLabel;
+    qrFornecedorProduto: TFDQuery;
+    dsFornecedorProduto: TDataSource;
+    qrFornecedorProdutoID_FORNECEDOR: TIntegerField;
+    qrFornecedorProdutoNOME: TStringField;
+    Q_padraoFORNECEDOR: TStringField;
     Label9: TLabel;
-    DBIDFornecedor: TDBEdit;
+    DBEdit1: TDBEdit;
     Label10: TLabel;
-    DBNome: TDBEdit;
+    DBEdit2: TDBEdit;
    procedure btNovoClick(Sender: TObject);
     procedure bt_PesquisarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -61,7 +66,7 @@ implementation
 
 {$R *.dfm}
 
-uses uPesqProduto, U_Fornecedor;
+uses uPesqProduto, U_Fornecedor, U_DM;
 
 procedure TFrmProduto.btGravarClick(Sender: TObject);
 begin

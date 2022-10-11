@@ -544,7 +544,6 @@ object FrmLogin: TFrmLogin
     ParentBackground = False
     ParentFont = False
     TabOrder = 5
-    ExplicitWidth = 576
   end
   object StatusBar1: TStatusBar
     Left = 0
@@ -555,7 +554,6 @@ object FrmLogin: TFrmLogin
       item
         Width = 50
       end>
-    ExplicitWidth = 576
   end
   object btTrocarSenha: TBitBtn
     Left = 344

@@ -164,13 +164,13 @@ begin
       qrProduto.FieldByName('ESTOQUE').AsFloat:= qrProduto.FieldByName('ESTOQUE').AsFloat + qrPadraoItemQTDE.AsFloat;
       qrPadraoItem.Next;
     end;
-      qrProduto.Refresh;
 
    end;
+      qrProduto.Refresh;
      Messagedlg('Estoque atualizado com sucesso', mtInformation,[mbOk],0);
 
      //Insere o Contas a Pagar
-     qrContasPagar.Open;
+   qrContasPagar.Open;
    vParcela :=1;
 //   qrContasPagarID_SEQUENCIA.AsInteger:=vParcela;
    if (Q_padraoID_FORMA_PGTO.Value = 1) or (Q_padraoID_FORMA_PGTO.Value = 2) then
@@ -289,6 +289,15 @@ procedure TFrmCompra01.btDeletarClick(Sender: TObject);
 begin
    if Messagedlg('Deseja Excluir Todo o Registro?', mtConfirmation,[mbOK,mbNo], 0 ) = mrOk then
     begin
+   //Exclui as Parcelas
+    qrContasPagar.open;
+    qrContasPagar.First;
+     while not qrContasPagar.Eof do
+        begin
+          qrContasPagar.Delete;
+          qrContasPagar.Next;
+        end;
+        //Excluir os itens de compras
       qrPadraoItem.First;
       while qrPadraoItem.RecordCount > 0 do
         begin
@@ -301,6 +310,7 @@ begin
               qrPadraoitem.Next;
             end;
         end;
+        //Excluir o Cabeçalho
           inherited;
     end
     else
