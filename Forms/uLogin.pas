@@ -165,7 +165,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
-  Vcl.ComCtrls, dxGDIPlusClasses;
+  Vcl.ComCtrls, dxGDIPlusClasses, Vcl.Imaging.jpeg, RzPanel;
 
 type
   TFrmLogin = class(TForm)
@@ -176,9 +176,12 @@ type
     btCancelar: TBitBtn;
     Image1: TImage;
     Bevel1: TBevel;
-    Panel1: TPanel;
     StatusBar1: TStatusBar;
     btTrocarSenha: TBitBtn;
+    Image5: TImage;
+    Image3: TImage;
+    Image4: TImage;
+    RzPanel1: TRzPanel;
     procedure btCancelarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btEntrarClick(Sender: TObject);

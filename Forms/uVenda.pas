@@ -15,7 +15,6 @@ type
   TFrmVenda = class(TFrmPadraoMovimento)
     Q_padraoID_VENDA: TIntegerField;
     Q_padraoID_CLIENTE: TIntegerField;
-    Q_padraoID_FORMA_PGTO: TIntegerField;
     Q_padraoUSUARIO: TStringField;
     Q_padraoVALOR: TFMTBCDField;
     Q_padraoCADASTRO: TDateField;
@@ -23,8 +22,6 @@ type
     DBEdit1: TDBEdit;
     Label2: TLabel;
     DBID_CLIENTE: TDBEdit;
-    Label3: TLabel;
-    DBID_FormaPgto: TDBEdit;
     Label4: TLabel;
     DBUsuario: TDBEdit;
     Label5: TLabel;
@@ -43,13 +40,9 @@ type
     Label7: TLabel;
     DBLookupComboBox1: TDBLookupComboBox;
     Q_padraoDESCRICAO: TStringField;
-    Label8: TLabel;
-    DBLookupComboBox2: TDBLookupComboBox;
     Q_padraoPARCELA: TIntegerField;
     Q_padraoTROCO: TFMTBCDField;
     Q_padraoDINHEIRO: TFMTBCDField;
-    Label9: TLabel;
-    DBParcela: TDBEdit;
     qrPadraoItemID_SEQUENCIA: TIntegerField;
     qrPadraoItemID_VENDA: TIntegerField;
     qrPadraoItemID_PRODUTO: TIntegerField;
@@ -88,16 +81,26 @@ type
     qrContaReceberTOTAL_PAGAR: TFMTBCDField;
     qrContaReceberSTATUS: TStringField;
     qrContaReceberVALOR_PARCELA: TFMTBCDField;
+    btCheck: TBitBtn;
+    Q_padraoID_FORMA_PGTO: TIntegerField;
     procedure btNovoClick(Sender: TObject);
     procedure DBID_CLIENTEExit(Sender: TObject);
     procedure DBID_FormaPgtoExit(Sender: TObject);
-    procedure BitBtn2Click(Sender: TObject);
+    procedure btCheckClick(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
     procedure BitBtn4Click(Sender: TObject);
     procedure DBIDProdutoExit(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btDeletarClick(Sender: TObject);
     procedure bt_PesquisarClick(Sender: TObject);
+    procedure DBDescontoClick(Sender: TObject);
+    procedure DBDescontoExit(Sender: TObject);
+    procedure DBQtdeClick(Sender: TObject);
+    procedure DBQtdeExit(Sender: TObject);
+    procedure qrPadraoItemQTDEValidate(Sender: TField);
+    procedure btItemClick(Sender: TObject);
+    procedure btBuscaClick(Sender: TObject);
+    procedure btGravarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -111,20 +114,40 @@ implementation
 
 {$R *.dfm}
 
-uses U_DM, uPesqVendas;
+uses U_DM, uPesqVendas, uPesqCliente, uRecebimento;
 
-procedure TFrmVenda.BitBtn2Click(Sender: TObject);
-  var vProx: Integer;
+procedure TFrmVenda.btBuscaClick(Sender: TObject);
 begin
-  //Insere os Itens na Tabela de Itens De Venda
-  qrPadraoItem.Open;
-  qrProduto.Open;
-  qrPadraoItem.Last;
-  vProx:= qrPadraoItemID_SEQUENCIA.AsInteger +1;
-  qrPadraoItem.Append;
-  qrPadraoItemID_SEQUENCIA.AsInteger:=vProx;
-  DBIDProduto.SetFocus;
+//  if Q_Padrao.State in [dsEdit, dsInsert] then
+//    begin
+//     FrmPesqFormaPgto:=TfrmPesqFormaPgto.Create(self);
+//     FrmPesqFormaPgto.ShowModal;
+//     try
+//       if FrmPesqFormaPgto.vCodigo > 0 then
+//         begin
+//           Q_padraoID_FORMA_PGTO.AsInteger:= FrmPesqFormaPgto.vCodigo;
+//         end;
+//     Finally
+//      FreeAndNil(FrmPesqFormaPgto);                                                 //FAZEERRR
+//    end;
+//  end;
+end;
 
+procedure TFrmVenda.btCheckClick(Sender: TObject);
+begin
+  if Q_Padrao.State in[dsedit, dsinsert] then
+    begin
+      FrmPesqCliente:=TfrmPesqCliente.Create(self);
+      FrmPesqCliente.ShowModal;
+    try
+      if FrmPesqCliente.vCodigo > 0 then
+        begin
+          Q_padraoID_CLIENTE.AsInteger:= FrmPesqCliente.vCodigo;
+        end;
+         finally
+           FreeAndNil(FrmPesqCliente);
+          end;
+    end;
 
 end;
 
@@ -155,7 +178,7 @@ begin
      Messagedlg('Dado baixa do Estoque com sucesso', mtInformation,[mbOk],0);
 
      //Insere o Contas Receber
-   qrContaReceber.Open;
+  { qrContaReceber.Open;
    vParcela :=1;
    if (DBID_FormaPgto.Text = IntToStr(2)) or (DBID_FormaPgto.Text = IntToStr(5)) then
       begin
@@ -203,9 +226,17 @@ begin
                 qrContaReceber.Edit;
                 qrContaReceber.FieldByName('valor_parcela').AsFloat :=  qrContaReceber.FieldByName('valor_parcela').AsFloat - vDif;
                 qrContaReceber.Refresh;
-              end;
-
+              end;   }
             Messagedlg('Parcelas Geradas com Sucesso', mtInformation, [mbOk], 0);
+
+        //abre A Tela de recebimento
+        FrmRecebimento:=TfrmRecebimento.create(self);
+        FrmRecebimento.ShowModal;
+        try
+
+        finally
+         FreeAndNil(FrmRecebimento);
+        end;
 end;
 
 
@@ -262,6 +293,25 @@ begin
 
 end;
 
+procedure TFrmVenda.btGravarClick(Sender: TObject);
+begin
+  inherited;
+ btItem.Click;
+end;
+
+procedure TFrmVenda.btItemClick(Sender: TObject);
+  var vProx: Integer;
+begin
+  //Insere os Itens na Tabela de Itens De Venda
+  qrPadraoItem.Open;
+  qrProduto.Open;
+  qrPadraoItem.Last;
+  vProx:= qrPadraoItemID_SEQUENCIA.AsInteger +1;
+  qrPadraoItem.Append;
+  qrPadraoItemID_SEQUENCIA.AsInteger:=vProx;
+  DBIDProduto.SetFocus;
+end;
+
 procedure TFrmVenda.btNovoClick(Sender: TObject);
 begin
   inherited;
@@ -271,7 +321,7 @@ begin
  qrProduto.Open;
  DBUsuario.Text:= dm.vUsuario;
  DBValor.Text:=InttoStr(0);
- DBParcela.Text:=IntToStr(0);
+// DBParcela.Text:=IntToStr(0);
  DBID_Cliente.SetFocus;
 
 end;
@@ -281,6 +331,11 @@ begin
  FrmPesqVendas:=TfrmPesqVendas.Create(self);
  FrmPesqVendas.ShowModal;
  try
+   if FrmPesqVendas.vCodigo > 0 then
+    begin
+      Q_Padrao.Open;
+      Q_Padrao.Locate('ID_VENDA', FrmPesqVendas.vCodigo, []);
+    end;
 
  finally
   FreeAndNil(FrmPesqVendas);
@@ -292,19 +347,39 @@ end;
 procedure TFrmVenda.DBID_FormaPgtoExit(Sender: TObject);
 begin
     //Validar o forma pgto
-  if not  qrFormaPgto.Locate('ID_FORMA_PGTO', Q_padrao.fieldbyName('ID_FORMA_PGTO').AsInteger, []) then
-    begin
-      Messagedlg('A Forma de Pagamento não foi Encontrada!', mtInformation, [mbOk], 0);
-      DBID_FORMAPGTO.SetFocus;
-      abort;
-    end;
+//  if not  qrFormaPgto.Locate('ID_FORMA_PGTO', Q_padrao.fieldbyName('ID_FORMA_PGTO').AsInteger, []) then
+//    begin
+//      Messagedlg('A Forma de Pagamento não foi Encontrada!', mtInformation, [mbOk], 0);
+//      DBID_FORMAPGTO.SetFocus;
+//      abort;
+//    end;
     //Valida as qtds de Parcelas
-  if (DBID_FormaPgto.Text = IntToStr(2)) or (DBID_FormaPgto.Text = IntToStr(5)) then
+//  if (DBID_FormaPgto.Text = IntToStr(2)) or (DBID_FormaPgto.Text = IntToStr(5)) then
+//    begin
+//      DBParcela.Text:= IntToStr(1);
+//    end
+//    else
+//    DBParcela.SetFocus;
+end;
+
+procedure TFrmVenda.DBQtdeClick(Sender: TObject);
+begin
+  inherited;
+   qrPadraoItem.Edit;
+end;
+
+procedure TFrmVenda.DBQtdeExit(Sender: TObject);
+begin
+  if qrPadraoItemQTDE.AsFloat > qrProdutoESTOQUE.AsFloat then
     begin
-      DBParcela.Text:= IntToStr(1);
+      ShowMessage('A Quantidade é maior que o Estoque!' +
+      qrProdutoESTOQUE.AsString + '');
+      abort;
+      DBQtde.SetFocus;
     end
     else
-    DBParcela.SetFocus;
+     qrPadraoItemTOTAL_ITEM.AsFloat:=(qrPadraoItemQTDE.AsFloat * qrPadraoItemVL_VENDA.AsFloat) - (qrPadraoItemDESCONTO.AsFloat);
+     qrPadraoItem.Refresh;
 end;
 
 procedure TFrmVenda.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -313,6 +388,38 @@ begin
     qrCliente.Close;
     qrFormaPgto.Close;
     qrProduto.Close;
+end;
+
+procedure TFrmVenda.qrPadraoItemQTDEValidate(Sender: TField);
+begin
+  if qrProdutoESTOQUE.AsFloat = 0 then
+    begin
+      Messagedlg('Não possui Produto no Estoque', MtInformation, [MBOK], 0);
+      btItem.SetFocus;
+      qrPadraoItem.Delete;
+      abort;
+    end
+    else
+      if qrProdutoESTOQUE.AsFloat < qrProdutoESTOQUE_MIN.AsFloat then
+        begin
+           ShowMessage('Produto Abaixo do Estoque Min!' +
+           qrProdutoESTOQUE.AsString + '');
+           btItem.SetFocus;
+        end;
+
+end;
+
+procedure TFrmVenda.DBDescontoClick(Sender: TObject);
+begin
+  inherited;
+  qrPadraoitem.Edit;
+end;
+
+procedure TFrmVenda.DBDescontoExit(Sender: TObject);
+begin
+  qrPadraoItemTOTAL_ITEM.AsFloat:= (qrPadraoItemQTDE.AsFloat * qrPadraoItemVL_VENDA.AsFloat) - (qrPadraoItemDESCONTO.AsFloat);
+  qrPadraoItem.Refresh;
+
 end;
 
 procedure TFrmVenda.DBIDProdutoExit(Sender: TObject);
@@ -328,25 +435,31 @@ begin
      //soma a quantidade dos Itens
      qrPadraoItemTOTAL_ITEM.AsFloat:=(qrPadraoItemQTDE.AsFloat * qrPadraoItemVL_VENDA.AsFloat) -(qrPadraoItemDESCONTO.AsFloat);
      qrPadraoItem.Post;
-     BitBtn2.SetFocus;
+     btItem.SetFocus;
    end
      else
        Messagedlg('Produto não Encontrado',mtInformation, [mbOk], 0);
        qrPadraoItem.Cancel;
-       BitBtn2.SetFocus;
+       btItem.SetFocus;
 
 end;
 
 procedure TFrmVenda.DBID_CLIENTEExit(Sender: TObject);
 begin
-  //Validar o Cliente
+//  Validar o Cliente
+
+if Q_Padrao.State in [dsEdit, dsInsert] then
+    begin
   if not  qrCliente.Locate('ID_CLIENTE', Q_padrao.fieldbyName('id_cliente').AsInteger, []) then
     begin
       Messagedlg('Cliente não Encontrado!', mtInformation, [mbOk], 0);
       DBID_Cliente.SetFocus;
       abort;
-    end;
-
-end;
-
+    end
+    else
+      btGravar.Click;
+  end
+    else
+     abort;
+ end;
 end.

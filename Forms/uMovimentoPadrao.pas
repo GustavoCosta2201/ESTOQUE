@@ -14,7 +14,7 @@ type
   TFrmPadraoMovimento = class(TfrmPadrao)
     Panel3: TPanel;
     Panel4: TPanel;
-    BitBtn2: TBitBtn;
+    btItem: TBitBtn;
     BitBtn3: TBitBtn;
     BitBtn4: TBitBtn;
     BitBtn5: TBitBtn;

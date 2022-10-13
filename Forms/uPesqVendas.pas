@@ -101,8 +101,12 @@ type
     qrPesquisaUSUARIO: TStringField;
     qrPesquisaCADASTRO: TDateField;
     qrPesquisaVALOR: TFMTBCDField;
+    RelVenda: TfrxReport;
     procedure ComboBox1Change(Sender: TObject);
     procedure btPesquisaClick(Sender: TObject);
+    procedure btTransferirClick(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure btImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -115,6 +119,21 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFrmPesqVendas.btImprimirClick(Sender: TObject);
+var vCaminho: String;
+begin
+  vCaminho:= 'C:\ESTOQUE\EXE\RelVendas.fr3';
+  if FrmPesqVendas.RelVenda.LoadFromFile(vCaminho) then
+    begin
+      RelVenda.Clear;
+      RelVenda.LoadFromFile(vCaminho);
+      RelVenda.PrepareReport(true);
+      RelVenda.ShowPreparedReport;
+    end
+    else
+    Messagedlg('Relatório não encontrado', mtError, [MbOk],0);
+end;
 
 procedure TFrmPesqVendas.btPesquisaClick(Sender: TObject);
 begin
@@ -151,7 +170,7 @@ begin
         end;
 
         3:begin
-          qrPesquisa.SQL.Add('WHERE A_ID_FORMA_PGTO = :PFORMA');
+          qrPesquisa.SQL.Add('WHERE A.ID_FORMA_PGTO = :PFORMA');
           qrPesquisa.ParamByName('PFORMA').AsString:=EDNome.Text;
         end;
 
@@ -166,7 +185,7 @@ begin
         6:begin
         if Length(trim(MKInicio.Text)) = 20 then
         begin
-           qrPesquisa.SQL.Add('WHERE A.CADASTRO BETWEEN :PINICIO AND :PFIM');
+           qrPesquisa.SQL.Add('WHERE CADASTRO BETWEEN :PINICIO AND :PFIM');
            qrPesquisa.ParamByName('PINICIO').AsDate:=StrToDate(MKInicio.Text);
            qrPesquisa.ParamByName('PFIM').AsDate:=StrtoDate(MaskEdit1.Text);
         end;
@@ -185,6 +204,18 @@ begin
           else
             abort;
 end;
+procedure TFrmPesqVendas.btTransferirClick(Sender: TObject);
+begin
+  inherited;
+  if qrPesquisa.RecordCount > 0 then
+    begin
+      vCodigo:=qrPesquisaID_VENDA.AsInteger;
+    end
+    else
+    abort;
+
+end;
+
 procedure TFrmPesqVendas.ComboBox1Change(Sender: TObject);
 begin
   case ComboBox1.ItemIndex of
@@ -280,6 +311,12 @@ begin
   end;
 
 
+end;
+
+procedure TFrmPesqVendas.DBGrid1DblClick(Sender: TObject);
+begin
+  inherited;
+  btTransferir.Click;
 end;
 
 end.

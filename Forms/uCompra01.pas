@@ -15,7 +15,6 @@ type
   TFrmCompra01 = class(TFrmPadraoMovimento)
     Q_padraoID_COMPRA: TFDAutoIncField;
     Q_padraoID_FORNECEDOR: TIntegerField;
-    Q_padraoID_FORMA_PGTO: TIntegerField;
     Q_padraoUSUARIO: TStringField;
     Q_padraoCADASTRO: TDateField;
     Q_padraoVALOR: TFMTBCDField;
@@ -23,8 +22,6 @@ type
     DBIDCompra: TDBEdit;
     Label2: TLabel;
     DBIDFornecedor: TDBEdit;
-    Label3: TLabel;
-    DBIDFormaPgto: TDBEdit;
     Label4: TLabel;
     DBCadastro: TDBEdit;
     Label5: TLabel;
@@ -43,8 +40,6 @@ type
     Q_padraoDSECRICAO: TStringField;
     Label7: TLabel;
     DBNome: TDBLookupComboBox;
-    Label8: TLabel;
-    DBDescricao: TDBLookupComboBox;
     qrPadraoItemID_SEQUENCIA: TIntegerField;
     qrPadraoItemID_COMPRA: TIntegerField;
     qrPadraoItemID_PRODUTO: TIntegerField;
@@ -88,8 +83,6 @@ type
     dsItem: TfrxDBDataset;
     Q_padraoCOND_PGTO: TIntegerField;
     Q_padraoDESCRICAO: TStringField;
-    Label14: TLabel;
-    DBCondPgto: TDBEdit;
     qrContasPagar: TFDQuery;
     dsContasPagar: TDataSource;
     qrContasPagarID_SEQUENCIA: TIntegerField;
@@ -103,6 +96,14 @@ type
     qrContasPagarTOTAL_PAGAR: TFMTBCDField;
     qrContasPagarSTATUS: TStringField;
     DBGrid2: TDBGrid;
+    btCheck: TBitBtn;
+    Q_padraoID_FORMA_PGTO: TIntegerField;
+    DBIDFormaPgto: TDBEdit;
+    Label3: TLabel;
+    Label8: TLabel;
+    DBDescricao: TDBLookupComboBox;
+    DBCondPgto: TDBEdit;
+    btBusca: TBitBtn;
     procedure btNovoClick(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure DBIDProdutoExit(Sender: TObject);
@@ -113,6 +114,12 @@ type
     procedure BitBtn5Click(Sender: TObject);
     procedure DBIDFormaPgtoExit(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure DBDescontoClick(Sender: TObject);
+    procedure DBDescontoExit(Sender: TObject);
+    procedure DBQtdeClick(Sender: TObject);
+    procedure DBQtdeExit(Sender: TObject);
+    procedure btCheckClick(Sender: TObject);
+    procedure btBuscaClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -127,7 +134,7 @@ implementation
 
 {$R *.dfm}
 
-uses U_Padrao, U_DM, uPesqCompra;
+uses U_Padrao, U_DM, uPesqCompra, uPesqVendas, uPesqCliente, uPesqFornecedor;
 
 procedure TFrmCompra01.BitBtn2Click(Sender: TObject);
    var vProx: Integer;
@@ -285,6 +292,42 @@ begin
 
   end;
 
+procedure TFrmCompra01.btBuscaClick(Sender: TObject);
+begin
+//  if Q_Padrao.State in [dsEdit, dsInsert] then
+//    begin
+//     FrmPesqFormaPgto:=TfrmPesqFormaPgto.Create(self);
+//     FrmPesqFormaPgto.ShowModal;
+//     try
+//       if FrmPesqFormaPgto.vCodigo > 0 then
+//         begin
+//           Q_padraoID_FORMA_PGTO.AsInteger:= FrmPesqFormaPgto.vCodigo;
+//         end;
+//     Finally
+//      FreeAndNil(FrmPesqFormaPgto);                                                 //FAZEERRR
+//    end;
+//  end;
+
+end;
+
+procedure TFrmCompra01.btCheckClick(Sender: TObject);
+begin
+  if Q_Padrao.State in[dsedit, dsinsert] then
+    begin
+      FrmPesqFornecedor:=TfrmPesqFornecedor.Create(self);
+      FrmPesqFornecedor.ShowModal;
+      try
+        if FrmPesqFornecedor.vCodigo > 0 then
+          begin
+            Q_padraoID_FORNECEDOR.AsInteger:= FrmPesqFornecedor.vCodigo;
+          end;
+      finally
+         FreeAndNil(FrmPesqFornecedor);
+      end;
+    end;
+
+end;
+
 procedure TFrmCompra01.btDeletarClick(Sender: TObject);
 begin
    if Messagedlg('Deseja Excluir Todo o Registro?', mtConfirmation,[mbOK,mbNo], 0 ) = mrOk then
@@ -348,16 +391,30 @@ begin
   end;
 end;
 
+procedure TFrmCompra01.DBDescontoClick(Sender: TObject);
+begin
+  inherited;
+  qrPadraoItem.Edit; // Abre para Edição
+
+end;
+
+procedure TFrmCompra01.DBDescontoExit(Sender: TObject);
+begin
+  qrPadraoItemTOTAL_ITEM.AsFloat:= (qrPadraoItemQTDE.AsFloat * qrPadraoItemVL_CUSTO.AsFloat) - (qrPadraoItemDESCONTO.AsFloat);
+  qrPadraoItem.Refresh;
+
+end;
+
 procedure TFrmCompra01.DBIDFormaPgtoExit(Sender: TObject);
 begin
  //INSERE DADOS NA CONDIÇÃO DE PAGAMENTOS
  //Se for avista, ou cartão de crédito
- if (DBIDFormaPgto.Text = Inttostr(1)) or (DBIDFormaPgto.Text = InttoStr(2)) then
-   begin
-     DBCondPgto.Text:= InttoStr(1);
-    end
-    else
-    DBCondPgto.SetFocus;
+// if (DBIDFormaPgto.Text = Inttostr(1)) or (DBIDFormaPgto.Text = InttoStr(2)) then
+//   begin
+//     DBCondPgto.Text:= InttoStr(1);
+//    end
+//    else
+//    DBCondPgto.SetFocus;
 end;
 
 procedure TFrmCompra01.DBIDProdutoExit(Sender: TObject);
@@ -373,13 +430,24 @@ begin
      //soma a quantidade dos Itens
      qrPadraoItemTOTAL_ITEM.AsFloat:=(qrPadraoItemQTDE.AsFloat * qrPadraoItemVL_CUSTO.AsFloat)-(qrPadraoItemDESCONTO.AsFloat);
      qrPadraoItem.Post;
-     BitBtn2.SetFocus;
+     btItem.SetFocus;
    end
      else
        Messagedlg('Produto não Encontrado',mtInformation, [mbOk], 0);
        qrPadraoItem.Cancel;
-       BitBtn2.SetFocus;
+       btItem.SetFocus;
   end;
+
+procedure TFrmCompra01.DBQtdeClick(Sender: TObject);
+begin
+  inherited;
+  qrPadraoitem.Edit;
+end;
+
+procedure TFrmCompra01.DBQtdeExit(Sender: TObject);
+begin
+  qrPadraoItemTOTAL_ITEM.AsFloat:= (qrPadraoItemQTDE.AsFloat * qrPadraoItemVL_CUSTO.AsFloat) - (qrPadraoItemDESCONTO.AsFloat);
+end;
 
 procedure TFrmCompra01.FormClose(Sender: TObject; var Action: TCloseAction);
 begin

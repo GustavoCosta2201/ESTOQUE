@@ -2,6 +2,7 @@ inherited FrmVenda: TFrmVenda
   Caption = 'Cadastro de Vendas'
   ClientHeight = 622
   Position = poScreenCenter
+  ExplicitTop = -185
   ExplicitHeight = 651
   PixelsPerInch = 96
   TextHeight = 13
@@ -12,6 +13,10 @@ inherited FrmVenda: TFrmVenda
     end
     inherited bt_Pesquisar: TBitBtn
       OnClick = bt_PesquisarClick
+    end
+    inherited BitBtn1: TBitBtn
+      Top = 6
+      ExplicitTop = 6
     end
   end
   inherited Panel2: TPanel
@@ -24,8 +29,10 @@ inherited FrmVenda: TFrmVenda
       ExplicitLeft = 631
       ExplicitTop = 6
     end
-    inherited BitBtn2: TBitBtn
-      OnClick = BitBtn2Click
+    inherited btItem: TBitBtn
+      Top = 6
+      OnClick = btItemClick
+      ExplicitTop = 6
     end
     inherited BitBtn3: TBitBtn
       OnClick = BitBtn3Click
@@ -35,7 +42,9 @@ inherited FrmVenda: TFrmVenda
     end
   end
   inherited Panel3: TPanel
+    Height = 112
     Caption = 'SUBTOTAL'
+    ExplicitHeight = 112
     object Label1: TLabel
       Left = 56
       Top = 3
@@ -57,20 +66,6 @@ inherited FrmVenda: TFrmVenda
       Height = 13
       Caption = 'ID_CLIENTE'
       FocusControl = DBID_CLIENTE
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object Label3: TLabel
-      Left = 56
-      Top = 91
-      Width = 97
-      Height = 13
-      Caption = 'ID_FORMA_PGTO'
-      FocusControl = DBID_FormaPgto
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -108,7 +103,7 @@ inherited FrmVenda: TFrmVenda
     end
     object Label6: TLabel
       Left = 615
-      Top = 50
+      Top = 44
       Width = 37
       Height = 13
       Caption = 'VALOR'
@@ -127,34 +122,6 @@ inherited FrmVenda: TFrmVenda
       Height = 13
       Caption = 'CLIENTE'
       FocusControl = DBLookupComboBox1
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object Label8: TLabel
-      Left = 204
-      Top = 94
-      Width = 64
-      Height = 13
-      Caption = 'DESCRICAO'
-      FocusControl = DBLookupComboBox2
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object Label9: TLabel
-      Left = 615
-      Top = 93
-      Width = 50
-      Height = 13
-      Caption = 'PARCELA'
-      FocusControl = DBParcela
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -181,16 +148,6 @@ inherited FrmVenda: TFrmVenda
       TabOrder = 1
       OnExit = DBID_CLIENTEExit
     end
-    object DBID_FormaPgto: TDBEdit
-      Left = 56
-      Top = 107
-      Width = 134
-      Height = 21
-      DataField = 'ID_FORMA_PGTO'
-      DataSource = dsPadrao
-      TabOrder = 2
-      OnExit = DBID_FormaPgtoExit
-    end
     object DBUsuario: TDBEdit
       Left = 204
       Top = 16
@@ -199,7 +156,7 @@ inherited FrmVenda: TFrmVenda
       DataField = 'USUARIO'
       DataSource = dsPadrao
       Enabled = False
-      TabOrder = 3
+      TabOrder = 2
     end
     object DBCadastro: TDBEdit
       Left = 615
@@ -209,16 +166,16 @@ inherited FrmVenda: TFrmVenda
       DataField = 'CADASTRO'
       DataSource = dsPadrao
       Enabled = False
-      TabOrder = 4
+      TabOrder = 3
     end
     object DBValor: TDBEdit
-      Left = 615
-      Top = 66
+      Left = 614
+      Top = 62
       Width = 150
       Height = 21
       DataField = 'VALOR'
       DataSource = dsPadrao
-      TabOrder = 5
+      TabOrder = 4
     end
     object DBLookupComboBox1: TDBLookupComboBox
       Left = 204
@@ -227,35 +184,100 @@ inherited FrmVenda: TFrmVenda
       Height = 21
       DataField = 'CLIENTE'
       DataSource = dsPadrao
-      TabOrder = 6
-    end
-    object DBLookupComboBox2: TDBLookupComboBox
-      Left = 204
-      Top = 109
-      Width = 405
-      Height = 21
-      DataField = 'DESCRICAO'
-      DataSource = dsPadrao
-      TabOrder = 7
-    end
-    object DBParcela: TDBEdit
-      Left = 615
-      Top = 109
-      Width = 150
-      Height = 21
-      DataField = 'PARCELA'
-      DataSource = dsPadrao
-      TabOrder = 8
+      TabOrder = 5
     end
     object DBEdit2: TDBEdit
-      Left = 771
-      Top = 66
+      Left = 615
+      Top = 61
       Width = 150
       Height = 21
       DataField = 'SUBTOTAL'
       DataSource = dsPadraoItem
-      TabOrder = 9
+      TabOrder = 6
       Visible = False
+    end
+    object btCheck: TBitBtn
+      Left = 784
+      Top = 52
+      Width = 75
+      Height = 33
+      Glyph.Data = {
+        36090000424D3609000000000000360000002800000018000000180000000100
+        2000000000000009000000000000000000000000000000000000000000000000
+        00000000000000000000000000000000000000000000000000170000004C0000
+        007F000000B3000000E6000000E6000000B3000000800000004C000000170000
+        0000000000000000000000000000000000000000000000000000000000000000
+        00000000000000000000000000000000000600000084000000FB000000FF0000
+        00FF000000FF000000F5000000F5000000FF000000FF000000FF000000FB0000
+        0084000000060000000000000000000000000000000000000000000000000000
+        0000000000000000000000000031000000D1000000FF000000EE000000920000
+        005E0000002C00000003000000030000002C0000005E00000092000000EE0000
+        00FF000000D10000003100000000000000000000000000000000000000000000
+        0000000000000000006B000000FA000000FF000000B70000001A000000000000
+        00000000000000000000000000000000000000000000000000000000001A0000
+        00B7000000FF000000FA0000006B000000000000000000000000000000000000
+        000000000031000000FA000000F5000000650000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        000000000065000000F5000000FA000000310000000000000000000000000000
+        0006000000D1000000FF00000065000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        00000000000000000065000000FF000000D10000000600000000000000000000
+        0084000000FF000000B700000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        00000000000000000000000000B7000000FF0000008400000000000000170000
+        00FB000000EE0000001A00000000000000000000000000000000000000000000
+        0000000000050000000000000000000000000000000000000000000000000000
+        000000000000000000000000001A000000EE000000FB000000170000004C0000
+        00FF000000920000000000000000000000000000000000000000000000020000
+        0098000000F40000005400000000000000000000000000000000000000000000
+        000000000000000000000000000000000092000000FF0000004C000000800000
+        00FF0000005E00000000000000000000000000000000000000020000009E0000
+        00FF000000FF000000FB00000055000000000000000000000000000000000000
+        00000000000000000000000000000000005E000000FF0000007F000000B30000
+        00FF0000002C000000000000000000000000000000020000009E000000FF0000
+        00E300000076000000FC000000FB000000570000000000000000000000000000
+        00000000000000000000000000000000002C000000FF000000B3000000E60000
+        00F5000000030000000000000000000000000000006D000000FF000000E30000
+        0024000000000000005B000000FC000000FC0000005800000000000000000000
+        000000000000000000000000000000000003000000F5000000E6000000E60000
+        00F5000000030000000000000000000000000000003B000000AA000000240000
+        000000000000000000000000005B000000FC000000FC00000059000000000000
+        000000000000000000000000000000000003000000F5000000E6000000B30000
+        00FF0000002C0000000000000000000000000000000000000000000000000000
+        00000000000000000000000000000000005B000000FC000000FC0000005A0000
+        00000000000000000000000000000000002C000000FF000000B3000000800000
+        00FF0000005E0000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000005B000000FC000000FC0000
+        00450000000000000000000000000000005E000000FF0000007F0000004C0000
+        00FF000000920000000000000000000000000000000000000000000000000000
+        000000000000000000000000000000000000000000000000005B000000F50000
+        006700000000000000000000000000000092000000FF0000004C000000170000
+        00FB000000EE0000001A00000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000050000
+        000000000000000000000000001A000000EE000000FB00000017000000000000
+        0084000000FF000000B700000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        00000000000000000000000000B7000000FF0000008400000000000000000000
+        0006000000D1000000FF00000065000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        00000000000000000065000000FF000000D10000000600000000000000000000
+        000000000031000000FA000000F5000000650000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        000000000065000000F5000000FA000000310000000000000000000000000000
+        0000000000000000006B000000FA000000FF000000B70000001A000000000000
+        00000000000000000000000000000000000000000000000000000000001A0000
+        00B7000000FF000000FA0000006B000000000000000000000000000000000000
+        0000000000000000000000000031000000D1000000FF000000EE000000920000
+        005E0000002C00000003000000030000002C0000005E00000092000000EE0000
+        00FF000000D10000003100000000000000000000000000000000000000000000
+        00000000000000000000000000000000000600000084000000FB000000FF0000
+        00FF000000FF000000F5000000F5000000FF000000FF000000FF000000FB0000
+        0084000000060000000000000000000000000000000000000000000000000000
+        00000000000000000000000000000000000000000000000000170000004C0000
+        007F000000B3000000E6000000E6000000B3000000800000004C000000170000
+        0000000000000000000000000000000000000000000000000000}
+      TabOrder = 7
+      OnClick = btCheckClick
     end
   end
   inherited Panel4: TPanel
@@ -361,6 +383,8 @@ inherited FrmVenda: TFrmVenda
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      OnClick = DBQtdeClick
+      OnExit = DBQtdeExit
     end
     object DBCusto: TDBEdit
       Left = 309
@@ -391,6 +415,8 @@ inherited FrmVenda: TFrmVenda
       Font.Style = []
       ParentFont = False
       TabOrder = 3
+      OnClick = DBDescontoClick
+      OnExit = DBDescontoExit
     end
     object DBTotal: TDBEdit
       Left = 645
@@ -409,15 +435,18 @@ inherited FrmVenda: TFrmVenda
     end
   end
   inherited PageControl1: TPageControl
-    Height = 286
-    ExplicitHeight = 286
+    Top = 169
+    Height = 310
+    ActivePage = TabProduto
+    ExplicitTop = 169
+    ExplicitHeight = 310
     inherited TabProduto: TTabSheet
       ExplicitLeft = 4
       ExplicitTop = 24
       ExplicitWidth = 1100
-      ExplicitHeight = 258
+      ExplicitHeight = 282
       inherited DBGrid1: TDBGrid
-        Height = 258
+        Height = 282
         Columns = <
           item
             Expanded = False
@@ -466,9 +495,9 @@ inherited FrmVenda: TFrmVenda
       ExplicitLeft = 4
       ExplicitTop = 24
       ExplicitWidth = 1100
-      ExplicitHeight = 258
+      ExplicitHeight = 282
       inherited DBGrid3: TDBGrid
-        Height = 258
+        Height = 282
         DataSource = dsContaReceber
         Columns = <
           item
@@ -525,7 +554,6 @@ inherited FrmVenda: TFrmVenda
     end
   end
   inherited Q_padrao: TFDQuery
-    Active = True
     UpdateOptions.AssignedValues = [uvFetchGeneratorsPoint, uvGeneratorName]
     UpdateOptions.FetchGeneratorsPoint = gpImmediate
     UpdateOptions.GeneratorName = 'GEN_ID_VENDA'
@@ -555,11 +583,6 @@ inherited FrmVenda: TFrmVenda
     object Q_padraoID_CLIENTE: TIntegerField
       FieldName = 'ID_CLIENTE'
       Origin = 'ID_CLIENTE'
-      Required = True
-    end
-    object Q_padraoID_FORMA_PGTO: TIntegerField
-      FieldName = 'ID_FORMA_PGTO'
-      Origin = 'ID_FORMA_PGTO'
       Required = True
     end
     object Q_padraoUSUARIO: TStringField
@@ -618,6 +641,10 @@ inherited FrmVenda: TFrmVenda
       Precision = 18
       Size = 2
     end
+    object Q_padraoID_FORMA_PGTO: TIntegerField
+      FieldName = 'ID_FORMA_PGTO'
+      Origin = 'ID_FORMA_PGTO'
+    end
   end
   inherited dsPadrao: TDataSource
     Left = 1032
@@ -671,6 +698,7 @@ inherited FrmVenda: TFrmVenda
       FieldName = 'QTDE'
       Origin = 'QTDE'
       Required = True
+      OnValidate = qrPadraoItemQTDEValidate
       Precision = 18
       Size = 2
     end

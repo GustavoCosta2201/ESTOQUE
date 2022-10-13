@@ -1,5 +1,7 @@
 inherited FrmPesqCliente: TFrmPesqCliente
   Caption = 'Pesquisa de Cliente'
+  ExplicitWidth = 1289
+  ExplicitHeight = 516
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel

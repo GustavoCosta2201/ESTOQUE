@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.ExtCtrls, Vcl.ComCtrls,
-  Vcl.Menus;
+  Vcl.Menus, dxGDIPlusClasses;
 
 type
   TFrm_Principal = class(TForm)
@@ -41,8 +41,12 @@ type
     ListadeVendas1: TMenuItem;
     SobreoSistema1: TMenuItem;
     SpeedButton10: TSpeedButton;
-    SpeedButton1: TSpeedButton;
+    btFechar: TSpeedButton;
     Informaes1: TMenuItem;
+    Fechar1: TMenuItem;
+    Panel2: TPanel;
+    Image1: TImage;
+    Panel3: TPanel;
     procedure Timer1Timer(Sender: TObject);
     procedure SpeedButton10Click(Sender: TObject);
     procedure bt_UsuariosClick(Sender: TObject);
@@ -77,6 +81,10 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SpeedButton8Click(Sender: TObject);
+    procedure Vendas1Click(Sender: TObject);
+    procedure AbrirPesqVenda();
+    procedure ListadeVendas1Click(Sender: TObject);
+    procedure Fechar1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -92,7 +100,7 @@ implementation
 
 uses U_Usuario, U_Empresa, U_Clientes, U_Fornecedor, U_Produto, U_FormaPgto,
   uCompra01, ReportBuilderTest, uPesqUsuarios, uPesqFornecedor, uPesqCliente,
-  uPesqProduto, uPesqCompra, uAbout, U_DM, uLogin, uVenda;
+  uPesqProduto, uPesqCompra, uAbout, U_DM, uLogin, uVenda, uPesqVendas;
 
 procedure TFrm_Principal.AbrirTelaUsuario;
 begin
@@ -104,6 +112,19 @@ begin
     FrmUsuario.Free;
     FrmUsuario:= nil;
   end;
+end;
+
+procedure TFrm_Principal.AbrirPesqVenda;
+begin
+ FrmPesqVendas:=TfrmPesqVendas.Create(self);
+ FrmPesqVendas.ShowModal;
+ try
+
+
+ finally
+  FreeAndNil(FrmPesqVendas);
+
+ end;
 end;
 
 procedure TFrm_Principal.AbrirTelaCliente;
@@ -216,6 +237,11 @@ begin
     AbrirTelaEmpresa;
 end;
 
+procedure TFrm_Principal.Fechar1Click(Sender: TObject);
+begin
+ btFechar.Click;
+end;
+
 procedure TFrm_Principal.FormasdePgto1Click(Sender: TObject);
 begin
     AbrirTelaFormaPagamento;
@@ -302,6 +328,11 @@ begin
       FreeAndNil(FrmPesqProduto);
 
     end;
+end;
+
+procedure TFrm_Principal.ListadeVendas1Click(Sender: TObject);
+begin
+  AbrirPesqVenda;
 end;
 
 procedure TFrm_Principal.ListaUsuariosClick(Sender: TObject);
@@ -397,6 +428,18 @@ end;
 procedure TFrm_Principal.Usuario1Click(Sender: TObject);
 begin
     AbrirTelaUsuario;
+end;
+
+procedure TFrm_Principal.Vendas1Click(Sender: TObject);
+begin
+  FrmVenda:= TFrmVenda.create(self);
+  FrmVenda.ShowModal;
+  try
+
+  finally
+    FreeAndNil(FrmVenda);
+
+  end;
 end;
 
 end.

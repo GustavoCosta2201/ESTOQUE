@@ -24,7 +24,8 @@ uses
   uLogin in '..\Forms\uLogin.pas' {FrmLogin},
   uTrocarSenha in '..\Forms\uTrocarSenha.pas' {FrmTrocaSenha},
   uVenda in '..\Forms\uVenda.pas' {FrmVenda},
-  uPesqVendas in '..\Forms\uPesqVendas.pas' {FrmPesqVendas};
+  uPesqVendas in '..\Forms\uPesqVendas.pas' {FrmPesqVendas},
+  uRecebimento in '..\Forms\uRecebimento.pas' {FrmRecebimento};
 
 {$R *.res}
 
@@ -34,5 +35,6 @@ begin
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TFrmLogin, FrmLogin);
+  Application.CreateForm(TFrmRecebimento, FrmRecebimento);
   Application.Run;
 end.

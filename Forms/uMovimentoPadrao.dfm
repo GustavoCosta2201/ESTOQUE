@@ -2,6 +2,7 @@ inherited FrmPadraoMovimento: TFrmPadraoMovimento
   Caption = 'Formul'#225'rio Padr'#227'o de Movimento'
   ClientHeight = 620
   ClientWidth = 1108
+  ExplicitTop = -183
   ExplicitWidth = 1114
   ExplicitHeight = 649
   PixelsPerInch = 96
@@ -26,7 +27,7 @@ inherited FrmPadraoMovimento: TFrmPadraoMovimento
       ExplicitTop = 14
       ExplicitWidth = 344
     end
-    object BitBtn2: TBitBtn
+    object btItem: TBitBtn
       Left = 8
       Top = 7
       Width = 92
