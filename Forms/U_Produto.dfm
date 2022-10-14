@@ -1,6 +1,7 @@
 inherited FrmProduto: TFrmProduto
   Caption = 'Cadastro de Produtos'
   ClientHeight = 376
+  Position = poScreenCenter
   ExplicitHeight = 405
   PixelsPerInch = 96
   TextHeight = 13

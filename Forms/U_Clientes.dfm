@@ -1,6 +1,7 @@
 inherited FrmCliente: TFrmCliente
   Caption = 'Cadastro de Cliente'
   ClientHeight = 441
+  Position = poScreenCenter
   ExplicitHeight = 470
   PixelsPerInch = 96
   TextHeight = 13

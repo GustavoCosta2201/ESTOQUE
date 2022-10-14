@@ -120,6 +120,7 @@ type
     procedure DBQtdeExit(Sender: TObject);
     procedure btCheckClick(Sender: TObject);
     procedure btBuscaClick(Sender: TObject);
+    procedure btGravarClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -193,7 +194,7 @@ begin
           qrContasPagar.FieldByName('Atraso').AsFloat:=0;
           qrContasPagar.FieldByName('vl_juros').AsFloat:=0;
           qrContasPagar.FieldByName('total_pagar').AsFloat:= qrContasPagar.FieldByName('valor_parcela').AsFloat; //Total a pagar recebe o valor total da Parcela
-          qrContasPagar.FieldByName('status').AsString:='RECEBIDO';
+          qrContasPagar.FieldByName('status').AsString:='PAGO';
           qrContasPagar.Post;
           inc(vParcela);      //Auto Incrementa a Parcela
 
@@ -360,6 +361,13 @@ begin
       abort;
 end;
 
+procedure TFrmCompra01.btGravarClick(Sender: TObject);
+begin
+  inherited;
+ Q_Padrao.Refresh;
+ btItem.Click;
+end;
+
 procedure TFrmCompra01.btNovoClick(Sender: TObject);
 begin
   //Carga, abre uma nova linha
@@ -409,12 +417,12 @@ procedure TFrmCompra01.DBIDFormaPgtoExit(Sender: TObject);
 begin
  //INSERE DADOS NA CONDIÇÃO DE PAGAMENTOS
  //Se for avista, ou cartão de crédito
-// if (DBIDFormaPgto.Text = Inttostr(1)) or (DBIDFormaPgto.Text = InttoStr(2)) then
-//   begin
-//     DBCondPgto.Text:= InttoStr(1);
-//    end
-//    else
-//    DBCondPgto.SetFocus;
+ if (DBIDFormaPgto.Text = Inttostr(1)) or (DBIDFormaPgto.Text = InttoStr(2)) then
+   begin
+     DBCondPgto.Text:= InttoStr(1);
+    end
+    else
+    DBCondPgto.SetFocus;
 end;
 
 procedure TFrmCompra01.DBIDProdutoExit(Sender: TObject);

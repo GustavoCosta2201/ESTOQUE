@@ -878,7 +878,8 @@ object FrmLogin: TFrmLogin
     Font.Name = 'Verdana'
     Font.Style = [fsBold]
     GradientColorStyle = gcsCustom
-    GradientColorStop = 14273198
+    GradientColorStart = 16777092
+    GradientColorStop = clBlue
     GradientDirection = gdVerticalEnd
     GridColor = clWhite
     ParentFont = False

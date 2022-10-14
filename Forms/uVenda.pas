@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
   Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.DBCtrls, Vcl.StdCtrls, Vcl.Buttons,
-  Vcl.ExtCtrls, Vcl.Mask;
+  Vcl.ExtCtrls, Vcl.Mask, frxClass, frxDBSet;
 
 type
   TFrmVenda = class(TFrmPadraoMovimento)
@@ -83,6 +83,25 @@ type
     qrContaReceberVALOR_PARCELA: TFMTBCDField;
     btCheck: TBitBtn;
     Q_padraoID_FORMA_PGTO: TIntegerField;
+    qrEmpresa: TFDQuery;
+    dsEmpresa: TDataSource;
+    qrEmpresaID_EMPRESA: TIntegerField;
+    qrEmpresaRAZAO_SOCIAL: TStringField;
+    qrEmpresaN_FANTASIA: TStringField;
+    qrEmpresaENDERECO: TStringField;
+    qrEmpresaNUMERO: TIntegerField;
+    qrEmpresaBAIRRO: TStringField;
+    qrEmpresaCIDADE: TStringField;
+    qrEmpresaUF: TStringField;
+    qrEmpresaTELEFONE: TStringField;
+    qrEmpresaCNPJ: TStringField;
+    qrEmpresaEMAIL: TStringField;
+    qrEmpresaLOGO: TBlobField;
+    qrEmpresaCADASTRO: TDateField;
+    frxReport1: TfrxReport;
+    frxDBDataset1: TfrxDBDataset;
+    frxDBDataset2: TfrxDBDataset;
+    frxDBDataset3: TfrxDBDataset;
     procedure btNovoClick(Sender: TObject);
     procedure DBID_CLIENTEExit(Sender: TObject);
     procedure DBID_FormaPgtoExit(Sender: TObject);
@@ -101,6 +120,7 @@ type
     procedure btItemClick(Sender: TObject);
     procedure btBuscaClick(Sender: TObject);
     procedure btGravarClick(Sender: TObject);
+    procedure BitBtn5Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -152,9 +172,6 @@ begin
 end;
 
 procedure TFrmVenda.BitBtn3Click(Sender: TObject);
-var vParcela: Integer;
-    vDif: Real;
-    vSoma: Real;
 begin
   Q_padrao.Edit;  //Abre para edição o cabeçalho
   //Insere o valor total dos itens
@@ -177,58 +194,6 @@ begin
       qrProduto.Refresh;
      Messagedlg('Dado baixa do Estoque com sucesso', mtInformation,[mbOk],0);
 
-     //Insere o Contas Receber
-  { qrContaReceber.Open;
-   vParcela :=1;
-   if (DBID_FormaPgto.Text = IntToStr(2)) or (DBID_FormaPgto.Text = IntToStr(5)) then
-      begin
-        while vParcela <= Q_padraoParcela.AsInteger do
-         begin
-           qrContaReceber.Insert;        //Abre para Inserção
-           qrContaReceberID_SEQUENCIA.AsInteger:=vParcela;
-           qrContaReceber.FieldByName('valor_parcela').AsFloat:= Q_padraoVALOR.AsFloat;   //Recebe a divisão total do Cond_pgto
-           qrContaReceber.FieldByName('dt_vencimento').Value:=date;   //Insere data de vencimento e pagamento
-           qrContaReceber.FieldByName('dt_pagamento').Value:=date;
-           qrContaReceber.FieldByName('juros').AsFloat:=0;     //Zera juros e Atraso
-           qrContaReceber.FieldByName('Atraso').AsFloat:=0;
-           qrContaReceber.FieldByName('vl_juros').AsFloat:=0;
-           qrContaReceber.FieldByName('total_pagar').AsFloat:=  qrContaReceber.FieldByName('valor_parcela').AsFloat; //Total a pagar recebe o valor total da Parcela
-           qrContaReceber.FieldByName('status').AsString:='RECEBIDO';
-           qrContaReceber.Post;
-           Messagedlg('Parcelas Geradas com Sucesso!', mtInformation, [mbOk], 0);
-           abort;
-      end;
-    end
-    else
-        qrContaReceber.First;
-        while vParcela <= Q_padraoParcela.AsInteger do            //Se for a Crédito ou a Prazo, Nota Promissória , cheque
-          begin
-            qrContaReceber.Insert;
-            qrContaReceberID_SEQUENCIA.AsInteger:=vParcela;
-             qrContaReceber.FieldByName('valor_parcela').AsFloat:= Q_padraoVALOR.AsFloat/Q_padraoParcela.Value;
-             qrContaReceber.FieldByName('dt_vencimento').Value:= Date  + (vParcela * 30);                                   //TESTE DE COMMIT
-             qrContaReceber.FieldByName('juros').AsFloat:=0;
-             qrContaReceber.FieldByName('Atraso').AsFloat:=0;
-             qrContaReceber.FieldByName('vl_juros').AsFloat:=0;
-             qrContaReceber.FieldByName('total_pagar').AsFloat:=  qrContaReceber.FieldByName('valor_parcela').AsFloat;
-             qrContaReceber.FieldByName('Status').AsString:='EM ABERTO';
-             qrContaReceber.Post;
-            inc(vParcela);
-             qrContaReceber.Next;            //TESTE DE COMMIT
-
-          end;
-            //Cria o Procedimento para Tratar A Diferença das Parcelas
-            vSoma:= vSoma + Q_padraoParcela.Value *  qrContaReceber.FieldByName('valor_parcela').AsFloat;
-            if vSoma > Q_padraoVALOR.AsFloat then
-              begin
-                vDif:=vSoma - Q_padraoVALOR.AsFloat;
-                qrContaReceber.Last;
-                qrContaReceber.Edit;
-                qrContaReceber.FieldByName('valor_parcela').AsFloat :=  qrContaReceber.FieldByName('valor_parcela').AsFloat - vDif;
-                qrContaReceber.Refresh;
-              end;   }
-            Messagedlg('Parcelas Geradas com Sucesso', mtInformation, [mbOk], 0);
-
         //abre A Tela de recebimento
         FrmRecebimento:=TfrmRecebimento.create(self);
         FrmRecebimento.ShowModal;
@@ -248,9 +213,6 @@ begin
     begin
       if qrProduto.Locate('ID_PRODUTO',qrPadraoItemID_PRODUTO.AsInteger, []) then
         begin
-          qrProduto.Edit;
-          qrProduto.FieldByName('ESTOQUE').AsFloat :=  qrProduto.FieldByName('ESTOQUE').AsFloat  + qrPadraoItemQTDE.AsFloat;
-          qrProduto.Refresh;
           qrPadraoItem.Delete;
           Messagedlg('Item Excluido com Sucesso', mtinformation, [MbOk], 0);
         end
@@ -258,6 +220,21 @@ begin
           abort;
     end;
 
+end;
+
+procedure TFrmVenda.BitBtn5Click(Sender: TObject);
+var vCaminho: String;
+begin
+  vCaminho:='C:\ESTOQUE\EXE\RelReciboVenda.fr3';
+ if FrmVenda.frxReport1.LoadFromFile(vCaminho)then
+  begin
+    FrxReport1.Clear;
+    frxReport1.LoadFromFile(vCaminho);
+    FrxReport1.PrepareReport(true);
+    FrxReport1.ShowPreparedReport;
+  end
+  else
+    Messagedlg('Relatório não encontrado', mtInformation, [mbok], 0);
 end;
 
 procedure TFrmVenda.btDeletarClick(Sender: TObject);

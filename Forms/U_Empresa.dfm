@@ -2,6 +2,7 @@ inherited FrmEmpresa: TFrmEmpresa
   Caption = 'Cadastro de Empresa'
   ClientHeight = 521
   ClientWidth = 1094
+  Position = poScreenCenter
   ExplicitWidth = 1100
   ExplicitHeight = 550
   PixelsPerInch = 96
@@ -128,7 +129,7 @@ inherited FrmEmpresa: TFrmEmpresa
     Width = 1094
     Height = 74
     TabOrder = 14
-    ExplicitTop = 434
+    ExplicitTop = 447
     ExplicitWidth = 1094
     ExplicitHeight = 74
     inherited DBNavigator1: TDBNavigator

@@ -1,5 +1,6 @@
 inherited frmUsuario: TfrmUsuario
   Caption = 'Cadastro de Usu'#225'rios'
+  Position = poScreenCenter
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel [0]

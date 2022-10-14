@@ -1,6 +1,7 @@
 inherited FrmFornecedor: TFrmFornecedor
   Caption = 'Fornecedores'
   ClientHeight = 461
+  Position = poScreenCenter
   ExplicitHeight = 490
   PixelsPerInch = 96
   TextHeight = 13

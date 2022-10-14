@@ -305,6 +305,7 @@ inherited FrmCompra01: TFrmCompra01
       DataField = 'ID_FORMA_PGTO'
       DataSource = dsPadrao
       TabOrder = 8
+      OnExit = DBIDFormaPgtoExit
     end
     object DBDescricao: TDBLookupComboBox
       Left = 198
@@ -543,11 +544,12 @@ inherited FrmCompra01: TFrmCompra01
   inherited PageControl1: TPageControl
     Width = 1193
     ActivePage = TabProduto
-    ExplicitTop = 153
     ExplicitWidth = 1193
-    ExplicitHeight = 324
     inherited TabProduto: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
       ExplicitWidth = 1185
+      ExplicitHeight = 256
       inherited DBGrid1: TDBGrid
         Width = 1185
         Columns = <
@@ -600,7 +602,7 @@ inherited FrmCompra01: TFrmCompra01
       ExplicitLeft = 4
       ExplicitTop = 24
       ExplicitWidth = 1185
-      ExplicitHeight = 296
+      ExplicitHeight = 256
       object DBGrid2: TDBGrid [0]
         Left = 0
         Top = 0
