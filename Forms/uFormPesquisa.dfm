@@ -561,6 +561,14 @@ object FrmPesquisa: TFrmPesquisa
     Color = clActiveCaption
     ParentBackground = False
     TabOrder = 2
+    object DBNavigator2: TDBNavigator
+      Left = 678
+      Top = 19
+      Width = 80
+      Height = 25
+      VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+      TabOrder = 0
+    end
   end
   object qrPesquisa: TFDQuery
     Connection = DM.Conexao

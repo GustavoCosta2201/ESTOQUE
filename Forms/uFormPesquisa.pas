@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, frxClass, frxDBSet,
-  frxExportBaseDialog, frxExportPDF;
+  frxExportBaseDialog, frxExportPDF, Vcl.DBCtrls;
 
 type
   TFrmPesquisa = class(TForm)
@@ -31,6 +31,7 @@ type
     dsPesquisa: TDataSource;
     frxPDFExport1: TfrxPDFExport;
     frxDBDataset1: TfrxDBDataset;
+    DBNavigator2: TDBNavigator;
     procedure ComboBox1Change(Sender: TObject);
     procedure DBGrid1KeyPress(Sender: TObject; var Key: Char);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

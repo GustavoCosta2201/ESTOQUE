@@ -191,8 +191,8 @@ inherited FrmVenda: TFrmVenda
       TabOrder = 5
     end
     object DBEdit2: TDBEdit
-      Left = 615
-      Top = 61
+      Left = 613
+      Top = 63
       Width = 150
       Height = 21
       DataField = 'SUBTOTAL'
@@ -201,10 +201,11 @@ inherited FrmVenda: TFrmVenda
       Visible = False
     end
     object btCheck: TBitBtn
-      Left = 784
-      Top = 52
+      Left = 793
+      Top = 54
       Width = 75
       Height = 33
+      Anchors = []
       Glyph.Data = {
         36090000424D3609000000000000360000002800000018000000180000000100
         2000000000000009000000000000000000000000000000000000000000000000
@@ -558,7 +559,6 @@ inherited FrmVenda: TFrmVenda
     end
   end
   inherited Q_padrao: TFDQuery
-    Active = True
     UpdateOptions.AssignedValues = [uvFetchGeneratorsPoint, uvGeneratorName]
     UpdateOptions.FetchGeneratorsPoint = gpImmediate
     UpdateOptions.GeneratorName = 'GEN_ID_VENDA'
@@ -656,7 +656,6 @@ inherited FrmVenda: TFrmVenda
     Top = 288
   end
   inherited qrPadraoItem: TFDQuery
-    Active = True
     IndexFieldNames = 'ID_VENDA'
     AggregatesActive = True
     MasterFields = 'ID_VENDA'
@@ -680,7 +679,7 @@ inherited FrmVenda: TFrmVenda
         Name = 'ID_VENDA'
         DataType = ftInteger
         ParamType = ptInput
-        Value = 122
+        Value = 4
       end>
     object qrPadraoItemID_SEQUENCIA: TIntegerField
       FieldName = 'ID_SEQUENCIA'
@@ -743,7 +742,6 @@ inherited FrmVenda: TFrmVenda
     Top = 295
   end
   object qrCliente: TFDQuery
-    Active = True
     Connection = DM.Conexao
     SQL.Strings = (
       'SELECT '
@@ -1062,7 +1060,7 @@ inherited FrmVenda: TFrmVenda
       'begin'
       ''
       'end.')
-    Left = 324
+    Left = 316
     Top = 257
     Datasets = <
       item

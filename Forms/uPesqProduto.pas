@@ -9,7 +9,8 @@ uses
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
   Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, Vcl.Mask, Vcl.ExtCtrls,
-  frxClass, frxExportBaseDialog, frxExportPDF, frxDBSet, frxServerClient;
+  frxClass, frxExportBaseDialog, frxExportPDF, frxDBSet, frxServerClient,
+  frxBarcode;
 
 type
   TFrmPesqProduto = class(TFrmPesquisa)
@@ -24,9 +25,12 @@ type
     qrPesquisaNOME: TStringField;
     qrPesquisaCADASTRO: TDateField;
     RelPesqPadrao: TfrxReport;
+    btEtiqueta: TBitBtn;
+    frxBarCodeObject1: TfrxBarCodeObject;
     procedure btPesquisaClick(Sender: TObject);
     procedure btTransferirClick(Sender: TObject);
     procedure btImprimirClick(Sender: TObject);
+    procedure btEtiquetaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -41,6 +45,21 @@ implementation
 {$R *.dfm}
 
 uses uPesqFornecedor, U_Fornecedor;
+
+procedure TFrmPesqProduto.btEtiquetaClick(Sender: TObject);
+var vCaminho: String;
+begin
+   vCaminho := 'C:\ESTOQUE\EXE\Etiquetas.fr3';
+   if frmPesqProduto.RelPesqPadrao.LoadFromFile(vCaminho) then
+    begin
+      RelPesqPadrao.Clear;
+      RelPesqPadrao.LoadFromFile(vCaminho);
+      RelPesqPadrao.PrepareReport(true);
+      RelPesqPadrao.ShowPreparedReport;
+    end;
+
+
+end;
 
 procedure TFrmPesqProduto.btImprimirClick(Sender: TObject);
   var vCaminho: String;

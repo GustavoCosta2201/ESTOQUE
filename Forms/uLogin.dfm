@@ -19,7 +19,7 @@ object FrmLogin: TFrmLogin
   PixelsPerInch = 96
   TextHeight = 13
   object Image1: TImage
-    Left = 328
+    Left = 304
     Top = 104
     Width = 161
     Height = 145
@@ -211,7 +211,7 @@ object FrmLogin: TFrmLogin
     Stretch = True
   end
   object Bevel1: TBevel
-    Left = 72
+    Left = 57
     Top = 268
     Width = 417
     Height = 64
