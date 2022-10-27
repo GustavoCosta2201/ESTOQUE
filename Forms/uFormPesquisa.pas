@@ -32,6 +32,7 @@ type
     frxPDFExport1: TfrxPDFExport;
     frxDBDataset1: TfrxDBDataset;
     DBNavigator2: TDBNavigator;
+    LbResultado: TLabel;
     procedure ComboBox1Change(Sender: TObject);
     procedure DBGrid1KeyPress(Sender: TObject; var Key: Char);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

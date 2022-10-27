@@ -5493,8 +5493,6 @@ object Frm_Principal: TFrm_Principal
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 2
-    ExplicitLeft = 80
-    ExplicitTop = 130
     object Image1: TImage
       Left = 1
       Top = 1
@@ -7443,8 +7441,6 @@ object Frm_Principal: TFrm_Principal
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 0
-      ExplicitLeft = 2
-      ExplicitTop = -4
     end
   end
   object Timer1: TTimer
@@ -14038,6 +14034,10 @@ object Frm_Principal: TFrm_Principal
         Caption = 'Lista de Vendas'
         ShortCut = 16470
         OnClick = ListadeVendas1Click
+      end
+      object ComprasFormasdePagamento1: TMenuItem
+        Caption = 'Compras/Formas de Pagamento'
+        OnClick = ComprasFormasdePagamento1Click
       end
     end
     object SobreoSistema1: TMenuItem

@@ -2,12 +2,11 @@ inherited FrmPesqProduto: TFrmPesqProduto
   Caption = 'Pesquisa de Produtos'
   ClientWidth = 1444
   ExplicitWidth = 1460
-  ExplicitHeight = 516
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
     Width = 1444
-    ExplicitWidth = 1445
+    ExplicitWidth = 1444
     inherited GroupBox47: TGroupBox
       inherited ComboBox1: TComboBox
         Items.Strings = (
@@ -620,6 +619,10 @@ inherited FrmPesqProduto: TFrmPesqProduto
   end
   inherited Panel2: TPanel
     Width = 1444
+    ExplicitWidth = 1444
+    inherited DBNavigator2: TDBNavigator
+      Hints.Strings = ()
+    end
   end
   inherited qrPesquisa: TFDQuery
     Active = True
@@ -652,6 +655,7 @@ inherited FrmPesqProduto: TFrmPesqProduto
       FieldName = 'VL_CUSTO'
       Origin = 'VL_CUSTO'
       Required = True
+      currency = True
       Precision = 18
       Size = 2
     end
@@ -659,6 +663,7 @@ inherited FrmPesqProduto: TFrmPesqProduto
       FieldName = 'VL_VENDA'
       Origin = 'VL_VENDA'
       Required = True
+      currency = True
       Precision = 18
       Size = 2
     end

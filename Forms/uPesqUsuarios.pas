@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
   Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, Vcl.Mask, Vcl.ExtCtrls,
-  frxClass, frxDBSet, frxExportBaseDialog, frxExportPDF;
+  frxClass, frxDBSet, frxExportBaseDialog, frxExportPDF, Vcl.DBCtrls;
 
 type
   TFrmPesqUsuarios = class(TFrmPesquisa)
@@ -95,6 +95,9 @@ begin
 end;
 
   qrPesquisa.Open; //Abre a query e mostra o resultado
+
+   //Mostra a Quantidade de Registros Encontrados
+    LbResultado.Caption :='Total de Registros encontrados: ' + IntToStr(qrPesquisa.RecordCount);
 
     if qrPesquisa.IsEmpty then
       begin

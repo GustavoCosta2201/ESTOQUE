@@ -721,7 +721,7 @@ object FrmLogin: TFrmLogin
       end>
   end
   object btTrocarSenha: TBitBtn
-    Left = 344
+    Left = 336
     Top = 280
     Width = 121
     Height = 45

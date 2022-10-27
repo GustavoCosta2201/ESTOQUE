@@ -20,19 +20,22 @@
     <Transaction>2022/10/07 21:51:07.000.610,C:\ESTOQUE\Forms\uAbout.dfm=C:\ESTOQUE\Projeto\ABOUT.dfm</Transaction>
     <Transaction>2022/10/07 21:51:07.000.610,C:\ESTOQUE\Forms\uAbout.pas=C:\ESTOQUE\Projeto\ABOUT.pas</Transaction>
     <Transaction>2022/10/07 21:55:24.000.501,=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
-    <Transaction>2022/10/07 21:56:47.000.485,C:\ESTOQUE\Forms\uLogin.pas=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
     <Transaction>2022/10/07 21:56:47.000.485,C:\ESTOQUE\Forms\uLogin.dfm=C:\ESTOQUE\Projeto\Unit1.dfm</Transaction>
+    <Transaction>2022/10/07 21:56:47.000.485,C:\ESTOQUE\Forms\uLogin.pas=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
     <Transaction>2022/10/08 22:45:51.000.076,=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
     <Transaction>2022/10/08 22:46:32.000.479,C:\ESTOQUE\Forms\uTrocarSenha.pas=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
     <Transaction>2022/10/08 22:46:32.000.479,C:\ESTOQUE\Forms\uTrocarSenha.dfm=C:\ESTOQUE\Projeto\Unit1.dfm</Transaction>
     <Transaction>2022/10/10 08:58:00.000.741,=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
-    <Transaction>2022/10/10 08:58:49.000.815,C:\ESTOQUE\Projeto\Unit1.pas=C:\ESTOQUE\Forms\uVenda.pas</Transaction>
     <Transaction>2022/10/10 08:58:49.000.815,C:\ESTOQUE\Projeto\Unit1.dfm=C:\ESTOQUE\Forms\uVenda.dfm</Transaction>
+    <Transaction>2022/10/10 08:58:49.000.815,C:\ESTOQUE\Projeto\Unit1.pas=C:\ESTOQUE\Forms\uVenda.pas</Transaction>
     <Transaction>2022/10/11 16:28:15.000.166,=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
     <Transaction>2022/10/11 16:28:43.000.616,C:\ESTOQUE\Projeto\Unit1.pas=C:\ESTOQUE\Forms\uPesqVendas.pas</Transaction>
     <Transaction>2022/10/11 16:28:43.000.616,C:\ESTOQUE\Projeto\Unit1.dfm=C:\ESTOQUE\Forms\uPesqVendas.dfm</Transaction>
     <Transaction>2022/10/13 15:29:57.000.924,=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
-    <Transaction>2022/10/13 15:31:36.000.315,C:\ESTOQUE\Projeto\Unit1.dfm=C:\ESTOQUE\Forms\uRecebimento.dfm</Transaction>
     <Transaction>2022/10/13 15:31:36.000.315,C:\ESTOQUE\Projeto\Unit1.pas=C:\ESTOQUE\Forms\uRecebimento.pas</Transaction>
+    <Transaction>2022/10/13 15:31:36.000.315,C:\ESTOQUE\Projeto\Unit1.dfm=C:\ESTOQUE\Forms\uRecebimento.dfm</Transaction>
+    <Transaction>2022/10/27 13:33:06.158,=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
+    <Transaction>2022/10/27 13:34:31.358,C:\ESTOQUE\Forms\uPesqCompraFormaPgto.pas=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
+    <Transaction>2022/10/27 13:34:31.358,C:\ESTOQUE\Forms\uPesqCompraFormaPgto.dfm=C:\ESTOQUE\Projeto\Unit1.dfm</Transaction>
   </Transactions>
 </BorlandProject>

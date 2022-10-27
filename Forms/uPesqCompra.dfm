@@ -1,7 +1,6 @@
 inherited FrmPesqCompra: TFrmPesqCompra
   Caption = 'Pesquisa de Compras'
-  ExplicitWidth = 1289
-  ExplicitHeight = 516
+  ExplicitTop = -50
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
@@ -27,6 +26,24 @@ inherited FrmPesqCompra: TFrmPesqCompra
       Left = 1153
       OnClick = btImprimirClick
       ExplicitLeft = 1153
+    end
+  end
+  inherited Panel2: TPanel
+    object LbCompras: TLabel [1]
+      Left = 425
+      Top = 16
+      Width = 109
+      Height = 21
+      Caption = 'Valor Compra:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Leelawadee UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    inherited DBNavigator2: TDBNavigator
+      Hints.Strings = ()
     end
   end
   inherited qrPesquisa: TFDQuery
@@ -92,13 +109,14 @@ inherited FrmPesqCompra: TFrmPesqCompra
     object qrPesquisaVALOR: TFMTBCDField
       FieldName = 'VALOR'
       Origin = 'VALOR'
+      currency = True
       Precision = 18
       Size = 2
     end
   end
   inherited frxPDFExport1: TfrxPDFExport
-    Left = 272
-    Top = 272
+    Left = 232
+    Top = 328
   end
   object RelCompra: TfrxReport [6]
     Version = '6.9.3'
@@ -475,6 +493,6 @@ inherited FrmPesqCompra: TFrmPesqCompra
   inherited frxDBDataset1: TfrxDBDataset
     DataSet = qrPesquisa
     Left = 160
-    Top = 336
+    Top = 328
   end
 end

@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, frxClass, frxExportBaseDialog, frxExportPDF,
   frxDBSet, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Grids, Vcl.DBGrids,
-  Vcl.StdCtrls, Vcl.Buttons, Vcl.Mask, Vcl.ExtCtrls;
+  Vcl.StdCtrls, Vcl.Buttons, Vcl.Mask, Vcl.ExtCtrls, Vcl.DBCtrls;
 
 type
   TFrmPesqCompra = class(TFrmPesquisa)
@@ -22,10 +22,12 @@ type
     qrPesquisaCADASTRO: TDateField;
     qrPesquisaVALOR: TFMTBCDField;
     RelCompra: TfrxReport;
+    LbCompras: TLabel;
     procedure btPesquisaClick(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure btTransferirClick(Sender: TObject);
     procedure btImprimirClick(Sender: TObject);
+    procedure SomaCompra();
   private
     { Private declarations }
   public
@@ -114,6 +116,9 @@ begin
 
  //ABRE A QUERY E MOSTRA O RESULTADO
  qrPesquisa.Open;
+    //Mostra a Quantidade de Registros Encontrados
+    LbResultado.Caption :='Total de Registros encontrados: ' + IntToStr(qrPesquisa.RecordCount);
+    SomaCompra;
 
  if qrPesquisa.IsEmpty then
   begin
@@ -228,6 +233,20 @@ begin
       EDNome.Clear;
     end;
   end;
+end;
+
+procedure TFrmPesqCompra.SomaCompra;
+var vSoma: Currency;
+begin
+vSoma:=0;
+ //soma a quantidade de compras
+ qrPesquisa.First;
+ while not qrPesquisa.Eof do
+  begin
+    vSoma := vSoma + qrPesquisaVALOR.AsCurrency;
+    qrPesquisa.Next;
+  end;
+   LbCompras.Caption := 'Valor da Soma: ' + FormatFloat('R$ ##,##0.00',(vSoma));
 end;
 
 end.

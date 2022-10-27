@@ -89,7 +89,7 @@ uses
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, frxClass, frxDBSet, frxExportBaseDialog,
   frxExportPDF, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Grids,
-  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, Vcl.Mask, Vcl.ExtCtrls;
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, Vcl.Mask, Vcl.ExtCtrls, Vcl.DBCtrls;
 
 type
   TFrmPesqVendas = class(TFrmPesquisa)
@@ -102,11 +102,13 @@ type
     qrPesquisaCADASTRO: TDateField;
     qrPesquisaVALOR: TFMTBCDField;
     RelVenda: TfrxReport;
+    LbVenda: TLabel;
     procedure ComboBox1Change(Sender: TObject);
     procedure btPesquisaClick(Sender: TObject);
     procedure btTransferirClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
     procedure btImprimirClick(Sender: TObject);
+    procedure SomaVenda();
   private
     { Private declarations }
   public
@@ -197,6 +199,10 @@ begin
         end;
     end;
        qrPesquisa.Open;
+          //Mostra a Quantidade de Registros Encontrados
+    LbResultado.Caption :='Total de Registros encontrados: ' + IntToStr(qrPesquisa.RecordCount);
+    SomaVenda;
+
        if qrPesquisa.IsEmpty then
           begin
             Messagedlg('Registro não Encontrado', mtInformation, [MbOk], 0);
@@ -317,6 +323,19 @@ procedure TFrmPesqVendas.DBGrid1DblClick(Sender: TObject);
 begin
   inherited;
   btTransferir.Click;
+end;
+
+procedure TFrmPesqVendas.SomaVenda;
+var vSomaVenda: Currency;
+begin
+  vSomaVenda:= 0;
+  qrPesquisa.First;
+  While not qrPesquisa.Eof do
+    begin
+      vSomaVenda := vSomaVenda + qrPesquisaVALOR.AsCurrency;
+      qrPesquisa.Next;
+    end;
+    LbVenda.Caption := 'Valor total das vendas: ' + FormatFloat('R$ ##,##0.00',(vSomaVenda));
 end;
 
 end.

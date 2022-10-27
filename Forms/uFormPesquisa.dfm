@@ -33,8 +33,8 @@ object FrmPesquisa: TFrmPesquisa
     ParentFont = False
     TabOrder = 0
     object GroupBox47: TGroupBox
-      Left = 15
-      Top = 32
+      Left = 23
+      Top = 35
       Width = 226
       Height = 49
       Caption = 'Op'#231#245'es de Pesquisa'
@@ -64,19 +64,18 @@ object FrmPesquisa: TFrmPesquisa
     object GroupBox1: TGroupBox
       Left = 253
       Top = 35
-      Width = 258
+      Width = 259
       Height = 40
       Caption = 'Nome'
       TabOrder = 1
       object EDNome: TEdit
         Left = 2
         Top = 20
-        Width = 254
+        Width = 255
         Height = 18
         Align = alClient
         BorderStyle = bsNone
         TabOrder = 0
-        Text = 'EDNome'
       end
     end
     object GroupBox2: TGroupBox
@@ -561,11 +560,25 @@ object FrmPesquisa: TFrmPesquisa
     Color = clActiveCaption
     ParentBackground = False
     TabOrder = 2
+    object LbResultado: TLabel
+      Left = 25
+      Top = 16
+      Width = 87
+      Height = 21
+      Caption = 'Resultados:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Leelawadee UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
     object DBNavigator2: TDBNavigator
-      Left = 678
-      Top = 19
-      Width = 80
-      Height = 25
+      Left = 960
+      Top = 6
+      Width = 296
+      Height = 38
+      DataSource = dsPesquisa
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
       TabOrder = 0
     end
@@ -573,12 +586,12 @@ object FrmPesquisa: TFrmPesquisa
   object qrPesquisa: TFDQuery
     Connection = DM.Conexao
     Left = 16
-    Top = 272
+    Top = 276
   end
   object dsPesquisa: TDataSource
     DataSet = qrPesquisa
     Left = 16
-    Top = 328
+    Top = 332
   end
   object frxPDFExport1: TfrxPDFExport
     UseFileCache = True
@@ -606,13 +619,13 @@ object FrmPesquisa: TFrmPesquisa
     PDFStandard = psNone
     PDFVersion = pv17
     Left = 88
-    Top = 360
+    Top = 364
   end
   object frxDBDataset1: TfrxDBDataset
     UserName = 'frxDBDataset1'
     CloseDataSource = False
     BCDToCurrency = False
     Left = 104
-    Top = 280
+    Top = 284
   end
 end

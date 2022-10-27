@@ -58,6 +58,11 @@
         Visible = True
       end>
   end
+  inherited Panel2: TPanel
+    inherited DBNavigator2: TDBNavigator
+      Hints.Strings = ()
+    end
+  end
   inherited qrPesquisa: TFDQuery
     Active = True
     SQL.Strings = (

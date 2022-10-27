@@ -1,7 +1,6 @@
 inherited FrmPesqVendas: TFrmPesqVendas
   Caption = 'Formul'#225'rio de Pesquisas de Vendas'
-  ExplicitWidth = 1289
-  ExplicitHeight = 516
+  ExplicitTop = -50
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
@@ -78,6 +77,24 @@ inherited FrmPesqVendas: TFrmPesqVendas
         FieldName = 'VALOR'
         Visible = True
       end>
+  end
+  inherited Panel2: TPanel
+    object LbVenda: TLabel [1]
+      Left = 369
+      Top = 16
+      Width = 135
+      Height = 21
+      Caption = 'Valor das Vendas:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Leelawadee UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    inherited DBNavigator2: TDBNavigator
+      Hints.Strings = ()
+    end
   end
   inherited qrPesquisa: TFDQuery
     Active = True

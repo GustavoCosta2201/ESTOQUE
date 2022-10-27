@@ -10,7 +10,7 @@ uses
   FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
   Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, Vcl.Mask, Vcl.ExtCtrls,
   frxClass, frxExportBaseDialog, frxExportPDF, frxDBSet, frxServerClient,
-  frxBarcode;
+  frxBarcode, Vcl.DBCtrls;
 
 type
   TFrmPesqProduto = class(TFrmPesquisa)
@@ -135,6 +135,9 @@ qrPesquisa.Close;  //Fecha a Query
 end;
 
   qrPesquisa.Open; //Abre a query e mostra o resultado
+
+     //Mostra a Quantidade de Registros Encontrados
+    LbResultado.Caption :='Total de Registros encontrados: ' + IntToStr(qrPesquisa.RecordCount);
 
     if qrPesquisa.IsEmpty then
       begin
