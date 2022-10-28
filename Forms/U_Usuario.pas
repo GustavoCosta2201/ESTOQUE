@@ -61,7 +61,7 @@ begin
    if FrmPesqUsuarios.vCodigo > 0 then
      begin
        Q_padrao.Open;
-       Q_padrao.Locate('ID_USUARIO', FrmPesqUsuarios.vCodigo, []); //
+       Q_padrao.Locate('ID_USUARIO', FrmPesqUsuarios.vCodigo, []); //LOCALIZA E DIRECIONA PARA A TELA DE CADASTRO PARA VISUALIZAR
      end;
 
   finally

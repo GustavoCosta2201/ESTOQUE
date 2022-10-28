@@ -14039,6 +14039,14 @@ object Frm_Principal: TFrm_Principal
         Caption = 'Compras/Formas de Pagamento'
         OnClick = ComprasFormasdePagamento1Click
       end
+      object VendasFormasdePagamento1: TMenuItem
+        Caption = 'Vendas/Formas de Pagamento'
+        OnClick = VendasFormasdePagamento1Click
+      end
+      object RelatrioGeraporMs1: TMenuItem
+        Caption = 'Relat'#243'rio Gera por M'#234's'
+        OnClick = RelatrioGeraporMs1Click
+      end
     end
     object SobreoSistema1: TMenuItem
       Caption = 'Sobre o Sistema'

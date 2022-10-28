@@ -26,7 +26,9 @@ uses
   uVenda in '..\Forms\uVenda.pas' {FrmVenda},
   uPesqVendas in '..\Forms\uPesqVendas.pas' {FrmPesqVendas},
   uRecebimento in '..\Forms\uRecebimento.pas' {FrmRecebimento},
-  uPesqCompraFormaPgto in '..\Forms\uPesqCompraFormaPgto.pas' {FrmPesqCompraFormaPgto};
+  uPesqCompraFormaPgto in '..\Forms\uPesqCompraFormaPgto.pas' {FrmPesqCompraFormaPgto},
+  uPesqVendaFormaPgto in '..\Forms\uPesqVendaFormaPgto.pas' {FrmPesqVendaFormaPgto},
+  uPesqGeralMes in '..\Forms\uPesqGeralMes.pas' {FrmPesqGeralMes};
 
 {$R *.res}
 
@@ -36,5 +38,6 @@ begin
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TFrmLogin, FrmLogin);
+  Application.CreateForm(TFrmPesqGeralMes, FrmPesqGeralMes);
   Application.Run;
 end.

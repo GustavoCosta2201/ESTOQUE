@@ -48,6 +48,8 @@ type
     Image1: TImage;
     Panel3: TPanel;
     ComprasFormasdePagamento1: TMenuItem;
+    VendasFormasdePagamento1: TMenuItem;
+    RelatrioGeraporMs1: TMenuItem;
     procedure Timer1Timer(Sender: TObject);
     procedure SpeedButton10Click(Sender: TObject);
     procedure bt_UsuariosClick(Sender: TObject);
@@ -87,6 +89,8 @@ type
     procedure ListadeVendas1Click(Sender: TObject);
     procedure Fechar1Click(Sender: TObject);
     procedure ComprasFormasdePagamento1Click(Sender: TObject);
+    procedure VendasFormasdePagamento1Click(Sender: TObject);
+    procedure RelatrioGeraporMs1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -102,7 +106,7 @@ implementation
 
 uses U_Usuario, U_Empresa, U_Clientes, U_Fornecedor, U_Produto, U_FormaPgto,
   uCompra01, ReportBuilderTest, uPesqUsuarios, uPesqFornecedor, uPesqCliente,
-  uPesqProduto, uPesqCompra, uAbout, U_DM, uLogin, uVenda, uPesqVendas, uPesqCompraFormaPgto;
+  uPesqProduto, uPesqCompra, uAbout, U_DM, uLogin, uVenda, uPesqVendas, uPesqCompraFormaPgto, uPesqVendaFormaPgto, uPesqGeralMes;
 
 procedure TFrm_Principal.AbrirTelaUsuario;
 begin
@@ -366,6 +370,18 @@ begin
    AbrirTelaProduto;
 end;
 
+procedure TFrm_Principal.RelatrioGeraporMs1Click(Sender: TObject);
+begin
+  FrmPesqGeralMes := TFrmPesqGeralMes.Create(self);
+  FrmPesqGeralMes.ShowModal;
+  try
+
+  finally
+    FreeAndNil(FrmPesqGeralMes);
+
+  end;
+end;
+
 procedure TFrm_Principal.SpeedButton10Click(Sender: TObject);
 begin
   
@@ -452,6 +468,18 @@ begin
 
   finally
     FreeAndNil(FrmVenda);
+
+  end;
+end;
+
+procedure TFrm_Principal.VendasFormasdePagamento1Click(Sender: TObject);
+begin
+  FrmPesqVendaFormaPgto := TFrmPesqVendaFormaPgto.Create(self);
+  FrmPesqVendaFormaPgto.ShowModal;
+  try
+
+  finally
+    FreeAndNil(FrmPesqVendaFormaPgto);
 
   end;
 end;

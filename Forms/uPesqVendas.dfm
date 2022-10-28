@@ -1,6 +1,8 @@
 inherited FrmPesqVendas: TFrmPesqVendas
   Caption = 'Formul'#225'rio de Pesquisas de Vendas'
-  ExplicitTop = -50
+  ExplicitLeft = -209
+  ExplicitWidth = 1289
+  ExplicitHeight = 516
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
@@ -14,11 +16,6 @@ inherited FrmPesqVendas: TFrmPesqVendas
           'CADASTRO'
           'PER'#205'ODO'
           'TODOS')
-      end
-    end
-    inherited GroupBox1: TGroupBox
-      inherited EDNome: TEdit
-        Text = ''
       end
     end
     inherited btPesquisa: TBitBtn

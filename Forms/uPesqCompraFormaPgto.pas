@@ -166,7 +166,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFormPesquisa, Data.DB, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error,
   FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, frxClass, frxDBSet, frxExportBaseDialog, frxExportPDF,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.DBCtrls, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.Mask, Vcl.ExtCtrls;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.DBCtrls, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.Buttons, Vcl.Mask, Vcl.ExtCtrls, frxChart;
 
 type
   TFrmPesqCompraFormaPgto = class(TFrmPesquisa)
@@ -175,9 +175,12 @@ type
     qrPesquisaID_FORMA_PGTO: TIntegerField;
     qrPesquisaDESCRICAO: TStringField;
     LbValorCompra: TLabel;
+    frxReport1: TfrxReport;
+    frxChartObject1: TfrxChartObject;
     procedure FormShow(Sender: TObject);
     procedure btPesquisaClick(Sender: TObject);
     procedure SomaCompra();
+    procedure btImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -191,24 +194,44 @@ implementation
 
 {$R *.dfm}
 
+uses U_DM;
+
+procedure TFrmPesqCompraFormaPgto.btImprimirClick(Sender: TObject);
+var vCaminho: String;
+begin
+  vCaminho := 'C:\ESTOQUE\EXE\RelCompraFormaPgto.fr3';
+  if FrmPesqCompraFormaPgto.frxReport1.LoadFromFile(vCaminho) then;
+    begin
+      frxReport1.Clear;
+      frxReport1.LoadFromFile(vCaminho);
+      frxReport1.Variables['DataIni'] := QuotedStr(MKInicio.Text);
+      frxReport1.Variables['DataFim'] := QuotedStr(MaskEdit1.Text);
+      frxReport1.Variables['Quantidade'] := QuotedStr(LbResultado.Caption);
+      frxReport1.Variables['ValorCompra'] := QuotedStr(LbValorCompra.Caption);
+      frxReport1.Variables['Nome'] := QuotedStr(dm.vUsuario);
+      frxReport1.PrepareReport(true);
+      frxReport1.ShowPreparedReport;
+    end;
+end;
+
 procedure TFrmPesqCompraFormaPgto.btPesquisaClick(Sender: TObject);
 begin
   qrPesquisa.Close;
-  qrPesquisa.SQL.Clear;
   qrPesquisa.SQL.Add('');
   qrPesquisa.Params.Clear;
+  qrPesquisa.SQL.Clear;
   qrPesquisa.SQL.Add('SELECT COUNT(A.ID_COMPRA) AS QTD_COMPRA, '
                    + '  SUM(A.VALOR) AS VALOR_COMPRA, '
                    + '  A.ID_FORMA_PGTO, '
                    + '  B.DESCRICAO  '
                    + '  FROM COMPRA A  ');
 qrPesquisa.SQL.Add(' INNER JOIN FORMA_PGTO B ON B.ID_FORMA_PGTO = A.ID_FORMA_PGTO  ' );
-qrPesquisa.SQL.Add('WHERE A.CADASTRO BETWEEN :PDATAINI AND :PDATAFIM ');
-if Length(trim(MKInicio.Text)) = 20 then
+If Length(trim(MKInicio.Text)) = 20 then
 begin
-qrPesquisa.ParamByName('PDATAINI').AsDate := StrtoDate(MKInicio.Text);
+  qrPesquisa.SQL.Add('WHERE A.CADASTRO BETWEEN :PDATAINI AND :PDATAFIM ');
+  qrPesquisa.ParamByName('PDATAINI').AsDate := StrtoDate(MKInicio.Text);
+  qrPesquisa.ParamByName('PDATAFIM').AsDate :=StrtoDate(MaskEdit1.Text);
 end;
-qrPesquisa.ParamByName('PDATAFIM').AsDate :=StrtoDate(MaskEdit1.Text);
 qrPesquisa.SQL.Add('GROUP BY A.ID_FORMA_PGTO, B.DESCRICAO ');
 qrPesquisa.SQL.Add('ORDER BY A.ID_FORMA_PGTO, B.DESCRICAO') ;
 
@@ -231,7 +254,6 @@ begin
 end;
 
 procedure TFrmPesqCompraFormaPgto.SomaCompra;
-begin
 var vSoma: Currency;
 begin
 vSoma:=0;
@@ -244,5 +266,5 @@ vSoma:=0;
   end;
    LbValorCompra.Caption := 'Valor da Soma: ' + FormatFloat('R$ ##,##0.00',(vSoma));
 end;
-end;
+
 end.

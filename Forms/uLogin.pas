@@ -231,6 +231,10 @@ begin
   dm.qrLogin.ParamByName('PTIPO').AsString:= DBTipo.Text;
   dm.qrLogin.Open;
 
+    if  DBNome.Text = 'MASTER' then
+      begin
+        DBTipo.Text := 'ADMINISTRADOR';
+      end;
   if dm.qrLogin.RecordCount > 0 then  //Se Retornar
     begin  ////Se For Localizado
       ShowMessage('Seja Bem Vindo Sr(a).' + DBNome.Text + '');
@@ -243,6 +247,7 @@ begin
     else
       Messagedlg('Nome e Senha Incorretos, Verifique!!! ', mtInformation, [mbOk], 0);
 //        DBNome.SetFocus;
+
 
       //Encerra a Aplicação
       if vCount >3 then
