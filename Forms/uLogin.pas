@@ -174,7 +174,6 @@ type
     DBTipo: TComboBox;
     btEntrar: TBitBtn;
     btCancelar: TBitBtn;
-    Image1: TImage;
     Bevel1: TBevel;
     StatusBar1: TStatusBar;
     btTrocarSenha: TBitBtn;
@@ -182,6 +181,10 @@ type
     Image3: TImage;
     Image4: TImage;
     RzPanel1: TRzPanel;
+    Image1: TImage;
+    Image2: TImage;
+    Image6: TImage;
+    Image7: TImage;
     procedure btCancelarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btEntrarClick(Sender: TObject);

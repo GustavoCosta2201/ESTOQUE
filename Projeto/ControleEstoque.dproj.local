@@ -37,13 +37,13 @@
     <Transaction>2022/10/27 13:33:06.000.158,=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
     <Transaction>2022/10/27 13:34:31.000.358,C:\ESTOQUE\Projeto\Unit1.dfm=C:\ESTOQUE\Forms\uPesqCompraFormaPgto.dfm</Transaction>
     <Transaction>2022/10/27 13:34:31.000.358,C:\ESTOQUE\Projeto\Unit1.pas=C:\ESTOQUE\Forms\uPesqCompraFormaPgto.pas</Transaction>
-    <Transaction>2022/10/28 10:27:56.912,=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
-    <Transaction>2022/10/28 10:29:24.045,C:\ESTOQUE\Forms\uPesqVendaFormaPgto.dfm=C:\ESTOQUE\Projeto\Unit1.dfm</Transaction>
-    <Transaction>2022/10/28 10:29:24.045,C:\ESTOQUE\Forms\uPesqVendaFormaPgto.pas=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
-    <Transaction>2022/10/28 11:39:27.252,=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
-    <Transaction>2022/10/28 11:42:43.533,C:\ESTOQUE\Forms\uPesqGeraMes.pas=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
-    <Transaction>2022/10/28 11:42:43.533,C:\ESTOQUE\Forms\uPesqGeraMes.dfm=C:\ESTOQUE\Projeto\Unit1.dfm</Transaction>
-    <Transaction>2022/10/28 11:43:08.274,C:\ESTOQUE\Forms\uPesqGeralMes.dfm=C:\ESTOQUE\Forms\uPesqGeraMes.dfm</Transaction>
-    <Transaction>2022/10/28 11:43:08.274,C:\ESTOQUE\Forms\uPesqGeralMes.pas=C:\ESTOQUE\Forms\uPesqGeraMes.pas</Transaction>
+    <Transaction>2022/10/28 10:27:56.000.912,=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
+    <Transaction>2022/10/28 10:29:24.000.045,C:\ESTOQUE\Forms\uPesqVendaFormaPgto.dfm=C:\ESTOQUE\Projeto\Unit1.dfm</Transaction>
+    <Transaction>2022/10/28 10:29:24.000.045,C:\ESTOQUE\Forms\uPesqVendaFormaPgto.pas=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
+    <Transaction>2022/10/28 11:39:27.000.252,=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
+    <Transaction>2022/10/28 11:42:43.000.533,C:\ESTOQUE\Forms\uPesqGeraMes.pas=C:\ESTOQUE\Projeto\Unit1.pas</Transaction>
+    <Transaction>2022/10/28 11:42:43.000.533,C:\ESTOQUE\Forms\uPesqGeraMes.dfm=C:\ESTOQUE\Projeto\Unit1.dfm</Transaction>
+    <Transaction>2022/10/28 11:43:08.000.274,C:\ESTOQUE\Forms\uPesqGeralMes.dfm=C:\ESTOQUE\Forms\uPesqGeraMes.dfm</Transaction>
+    <Transaction>2022/10/28 11:43:08.000.274,C:\ESTOQUE\Forms\uPesqGeralMes.pas=C:\ESTOQUE\Forms\uPesqGeraMes.pas</Transaction>
   </Transactions>
 </BorlandProject>

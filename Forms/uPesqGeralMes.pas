@@ -122,6 +122,21 @@ type
     qrCompraMES: TSmallintField;
     qrCompraANO: TSmallintField;
     qrCompraVALOR_COMPRA: TFMTBCDField;
+    qrVendaMES: TSmallintField;
+    qrVendaANO: TSmallintField;
+    qrVendaVALOR_VENDA: TFMTBCDField;
+    qrContaPagarMES: TSmallintField;
+    qrContaPagarANO: TSmallintField;
+    qrContaPagarTOTAL_PAGO: TFMTBCDField;
+    qrContaReceberMES: TSmallintField;
+    qrContaReceberANO: TSmallintField;
+    qrContaReceberTOTAL_RECEBIDO: TFMTBCDField;
+    qrContasPagarAPagarMES: TSmallintField;
+    qrContasPagarAPagarANO: TSmallintField;
+    qrContasPagarAPagarVALOR_PAGAR: TFMTBCDField;
+    qrContaReceberAReceberMES: TSmallintField;
+    qrContaReceberAReceberANO: TSmallintField;
+    qrContaReceberAReceberTOTAL_PARCELA: TFMTBCDField;
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure BitBtn1Click(Sender: TObject);
     procedure btPesquisaClick(Sender: TObject);
@@ -148,24 +163,121 @@ end;
 
 procedure TFrmPesqGeralMes.btPesquisaClick(Sender: TObject);
 begin
-  case RGOpcao.ItemIndex of
+  case RGOpcao.ItemIndex of     //compra e vendas por mês
   0:begin
     qrCompra.Close;
     qrCompra.SQL.Add('');
     qrCompra.Params.Clear;
     qrCompra.SQL.Clear;
-    qrCompra.SQL.Add('SELECT EXTRACT(MONTH FROM A.CADASTRO) AS MES,   '
-                    + 'EXTRACT(YEAR FROM A.CADASTRO) AS ANO,  '
-                    + 'SUM(A.VALOR) AS VALOR_COMPRA,  '
-                    + 'FROM COMPRA A  ');
-    qrCompra.SQL.Add('WHERE A.CADASTRO BETWEEN :PDATAINI AND :PDATAFIM  ');
+    qrCompra.SQL.Add('SELECT EXTRACT(MONTH FROM A.CADASTRO) AS MES,      '
+                    + 'EXTRACT(YEAR FROM A.CADASTRO) AS ANO,     '
+                    + 'SUM(A.VALOR) AS VALOR_COMPRA,     '
+                    + '  FROM COMPRA A  ');
+  if Length(trim(MKInicio.Text)) = 20 then
+   begin
+    qrCompra.SQL.Add('WHERE A.CADASTRO BETWEEN :PDATAINI AND :PDATAFIM   ');
     qrCompra.ParamByName('PDATAINI').AsDate := StrToDate(MKInicio.Text);
     qrCompra.ParamByName('PDATAFIM').AsDate := StrToDate(MaskEdit1.Text);
+   end;
     qrCompra.SQL.Add('GROUP BY EXTRACT(MONTH FROM A.CADASTRO), EXTRACT(YEAR FROM A.CADASTRO)  ') ;
     qrCompra.SQL.Add('ORDER BY EXTRACT(MONTH FROM A.CADASTRO)  ');
-    qrCompra.Open;
+    //qrCompra.Open;
+
+    qrVenda.Close;                                               
+    qrVenda.SQL.Add('');
+    qrVenda.Params.Clear;
+    qrVenda.SQL.Clear;
+    qrVenda.SQL.Add('SELECT EXTRACT(MONTH FROM A.CADASTRO) AS MES,   '
+                    + 'EXTRACT(YEAR FROM A.CADASTRO) AS ANO,  '
+                    + 'SUM(A.VALOR) AS VALOR_VENDA,       '
+                    + '   FROM VENDA A  ');
+   if Length(trim(MKInicio.Text)) = 20 then
+    begin
+    qrVenda.SQL.Add('WHERE A.CADASTRO BETWEEN :PDATAINI AND :PDATAFIM  ');
+    qrVenda.ParamByName('PDATAINI').AsDate := StrToDate(MKInicio.Text);
+    qrVenda.ParamByName('PDATAFIM').AsDate := StrToDate(MaskEdit1.Text);
+    end;
+    qrVenda.SQL.Add('GROUP BY EXTRACT(MONTH FROM A.CADASTRO), EXTRACT(YEAR FROM A.CADASTRO)  ') ;
+    qrVenda.SQL.Add('ORDER BY EXTRACT(MONTH FROM A.CADASTRO)  ');
+    qrVenda.Open;
    end;
+   
+   1:begin
+     qrContaPagar.Close;
+     qrContaPagar.SQL.Add('');
+     qrContaPagar.Params.Clear;
+     qrContaPagar.SQL.Clear;
+     qrContaPagar.SQL.Add('SELECT EXTRACT(MONTH FROM A.DT_PAGAMENTO) AS MES,   '
+                    + 'EXTRACT(YEAR FROM A.DT_PAGAMENTO) AS ANO,  '
+                    + 'SUM(A.TOTAL_PAGAR) AS TOTAL_PAGO,   '
+                    + '  FROM CONTAS_PAGAR A   ');
+  if Length(trim(MKInicio.Text)) = 20 then
+   begin
+    qrContaPagar.SQL.Add('WHERE A.DT_PAGAMENTO BETWEEN :PDATAINI AND :PDATAFIM   ');
+    qrContaPagar.ParamByName('PDATAINI').AsDate := StrToDate(MKInicio.Text);
+    qrContaPagar.ParamByName('PDATAFIM').AsDate := StrToDate(MaskEdit1.Text);
+   end;
+    qrContaPagar.SQL.Add('GROUP BY EXTRACT(MONTH FROM A.DT_PAGAMENTO), EXTRACT(YEAR FROM A.DT_PAGAMENTO)  ') ;
+    qrContaPagar.SQL.Add('ORDER BY EXTRACT(MONTH FROM A.DT_PAGAMENTO)  ');
+    qrContaPagar.Open;
+
+    qrContaReceber.Close;
+    qrContaReceber.SQL.Add('');
+    qrContaReceber.Params.Clear;
+    qrContaReceber.SQL.Clear;
+    qrContaReceber.SQL.Add('SELECT EXTRACT(MONTH FROM A.DT_PAGAMENTO) AS MES,    '
+                    + 'EXTRACT(YEAR FROM A.DT_PAGAMENTO) AS ANO,  '
+                    + 'SUM(A.TOTAL_PAGAR) AS  TOTAL_RECEBIDO,  '
+                    + '  FROM CONTAS_RECEBER A  ');
+  if Length(trim(MKInicio.Text))= 20 then
+   begin
+    qrContaReceber.SQL.Add('WHERE A.DT_PAGAMENTO BETWEEN :PDATAINI AND :PDATAFIM  ');
+    qrContaReceber.ParamByName('PDATAINI').AsDate := StrToDate(MKInicio.Text);
+    qrContaReceber.ParamByName('PDATAFIM').AsDate := StrToDate(MaskEdit1.Text);
+   end;
+    qrContaReceber.SQL.Add('GROUP BY EXTRACT(MONTH FROM A.DT_PAGAMENTO), EXTRACT(YEAR FROM A.DT_PAGAMENTO)  ') ;
+    qrContaReceber.SQL.Add('ORDER BY EXTRACT(MONTH FROM A.DT_PAGAMENTO)  ');
+    qrContaReceber.Open;
+   end;
+  
+   2:begin
+     qrContasPagarAPagar.Close;
+     qrContasPagarAPagar.SQL.Add('');
+     qrContasPagarAPagar.Params.Clear;
+     qrContasPagarAPagar.SQL.Clear;
+     qrContasPagarAPagar.SQL.Add('SELECT EXTRACT(MONTH FROM A.DT_VENCIMENTO) AS MES,   '
+                    + 'EXTRACT(YEAR FROM A.DT_VENCIMENTO) AS ANO,  '
+                    + 'SUM(A.VL_PARCELA) AS VALOR_PAGAR,  '
+                    + '  FROM CONTAS_PAGAR A  ');
+  if Length(trim(MKInicio.Text)) = 20 then
+   begin
+    qrContasPagarAPagar.SQL.Add('WHERE A.DT_VENCIMENTO BETWEEN :PDATAINI AND :PDATAFIM  ');
+    qrContasPagarAPagar.ParamByName('PDATAINI').AsDate := StrToDate(MKInicio.Text);
+    qrContasPagarAPagar.ParamByName('PDATAFIM').AsDate := StrToDate(MaskEdit1.Text);
+   end;
+    qrContasPagarAPagar.SQL.Add('GROUP BY EXTRACT(MONTH FROM A.DT_VENCIMENTO), EXTRACT(YEAR FROM A.DT_VENCIMENTO)  ') ;
+    qrContasPagarAPagar.SQL.Add('ORDER BY EXTRACT(MONTH FROM A.DT_VENCIMENTO)  ');
+    qrContasPagarAPagar.Open;
+
+    qrContaReceberAReceber.Close;
+    qrContaReceberAReceber.SQL.Add('');
+    qrContaReceberAReceber.Params.Clear;
+    qrContaReceberAReceber.SQL.Clear;
+    qrContaReceberAReceber.SQL.Add('SELECT EXTRACT(MONTH FROM A.DT_VENCIMENTO) AS MES,   '
+                    + 'EXTRACT(YEAR FROM A.DT_VENCIMENTO) AS ANO,  '
+                    + 'SUM(A.VALOR_PARCELA) AS  TOTAL_PARCELA,  '
+                    + '  FROM CONTAS_RECEBER A  ');
+  if Length(trim(MKInicio.Text)) = 20 then
+   begin
+    qrContaReceberAReceber.SQL.Add('WHERE A.DT_VENCIMENTO BETWEEN :PDATAINI AND :PDATAFIM  ');
+    qrContaReceberAReceber.ParamByName('PDATAINI').AsDate := StrToDate(MKInicio.Text);
+    qrContaReceberAReceber.ParamByName('PDATAFIM').AsDate := StrToDate(MaskEdit1.Text);
+   end;
+    qrContaReceberAReceber.SQL.Add('GROUP BY EXTRACT(MONTH FROM A.DT_VENCIMENTO), EXTRACT(YEAR FROM A.DT_VENCIMENTO)  ') ;
+    qrContaReceberAReceber.SQL.Add('ORDER BY EXTRACT(MONTH FROM A.DT_VENCIMENTO)  ');
+    qrContaReceberAReceber.Open;   
  end;
+end;
 end;
 
 procedure TFrmPesqGeralMes.FormKeyPress(Sender: TObject; var Key: Char);

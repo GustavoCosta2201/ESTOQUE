@@ -32,7 +32,6 @@
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 1202
     object GroupBox2: TGroupBox
       Left = 405
       Top = 43
@@ -564,23 +563,212 @@
   end
   object qrVenda: TFDQuery
     Connection = DM.Conexao
+    SQL.Strings = (
+      'SELECT '
+      ' EXTRACT(MONTH FROM A.CADASTRO) AS MES,'
+      ' EXTRACT(YEAR FROM A.CADASTRO) AS ANO,'
+      ' SUM(A.VALOR) AS VALOR_VENDA'
+      'FROM VENDA A'
+      'WHERE A.CADASTRO BETWEEN :PDATAINI AND :PDATAFIM'
+      
+        'GROUP BY EXTRACT(MONTH FROM A.CADASTRO), EXTRACT(YEAR FROM A.CAD' +
+        'ASTRO)'
+      'ORDER BY EXTRACT(MONTH FROM A.CADASTRO)')
     Left = 880
     Top = 136
+    ParamData = <
+      item
+        Name = 'PDATAINI'
+        DataType = ftDate
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'PDATAFIM'
+        DataType = ftDate
+        ParamType = ptInput
+      end>
+    object qrVendaMES: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'MES'
+      Origin = 'MES'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qrVendaANO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'ANO'
+      Origin = 'ANO'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qrVendaVALOR_VENDA: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'VALOR_VENDA'
+      Origin = 'VALOR_VENDA'
+      ProviderFlags = []
+      ReadOnly = True
+      currency = True
+      Precision = 18
+      Size = 2
+    end
   end
   object qrContaPagar: TFDQuery
     Connection = DM.Conexao
+    SQL.Strings = (
+      'SELECT '
+      ' EXTRACT(MONTH FROM A.DT_PAGAMENTO) AS MES,'
+      ' EXTRACT(YEAR FROM A.DT_PAGAMENTO) AS ANO,'
+      ' SUM(A.TOTAL_PAGAR) AS TOTAL_PAGO'
+      'FROM CONTAS_PAGAR A'
+      'WHERE A.DT_PAGAMENTO BETWEEN :PDATAINI AND :PDATAFIM'
+      
+        'GROUP BY EXTRACT(MONTH FROM A.DT_PAGAMENTO), EXTRACT(YEAR FROM A' +
+        '.DT_PAGAMENTO)'
+      'ORDER BY EXTRACT(MONTH FROM A.DT_PAGAMENTO)')
     Left = 816
     Top = 136
+    ParamData = <
+      item
+        Name = 'PDATAINI'
+        DataType = ftDate
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'PDATAFIM'
+        DataType = ftDate
+        ParamType = ptInput
+      end>
+    object qrContaPagarMES: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'MES'
+      Origin = 'MES'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qrContaPagarANO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'ANO'
+      Origin = 'ANO'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qrContaPagarTOTAL_PAGO: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'TOTAL_PAGO'
+      Origin = 'TOTAL_PAGO'
+      ProviderFlags = []
+      ReadOnly = True
+      currency = True
+      Precision = 18
+      Size = 2
+    end
   end
   object qrContaReceber: TFDQuery
     Connection = DM.Conexao
-    Left = 752
+    SQL.Strings = (
+      'SELECT '
+      ' EXTRACT(MONTH FROM A.DT_PAGAMENTO) AS MES,'
+      ' EXTRACT(YEAR FROM A.DT_PAGAMENTO) AS ANO,'
+      ' SUM(A.TOTAL_PAGAR) AS TOTAL_RECEBIDO'
+      'FROM CONTAS_RECEBER A'
+      'WHERE A.DT_PAGAMENTO BETWEEN :PDATAINI AND :PDATAFIM'
+      
+        'GROUP BY EXTRACT(MONTH FROM A.DT_PAGAMENTO), EXTRACT(YEAR FROM A' +
+        '.DT_PAGAMENTO)'
+      'ORDER BY EXTRACT(MONTH FROM A.DT_PAGAMENTO)')
+    Left = 736
     Top = 138
+    ParamData = <
+      item
+        Name = 'PDATAINI'
+        DataType = ftDate
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'PDATAFIM'
+        DataType = ftDate
+        ParamType = ptInput
+      end>
+    object qrContaReceberMES: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'MES'
+      Origin = 'MES'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qrContaReceberANO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'ANO'
+      Origin = 'ANO'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qrContaReceberTOTAL_RECEBIDO: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'TOTAL_RECEBIDO'
+      Origin = 'TOTAL_RECEBIDO'
+      ProviderFlags = []
+      ReadOnly = True
+      currency = True
+      Precision = 18
+      Size = 2
+    end
   end
   object qrContasPagarAPagar: TFDQuery
     Connection = DM.Conexao
-    Left = 640
+    SQL.Strings = (
+      'SELECT '
+      ' EXTRACT(MONTH FROM A.DT_VENCIMENTO) AS MES,'
+      ' EXTRACT(YEAR FROM A.DT_VENCIMENTO) AS ANO,'
+      ' SUM(A.VL_PARCELA) AS VALOR_PAGAR'
+      'FROM CONTAS_PAGAR A'
+      'WHERE A.DT_VENCIMENTO BETWEEN :PDATAINI AND :PDATAFIM'
+      'AND A.STATUS = '#39'EM ABERTO'#39
+      
+        'GROUP BY EXTRACT(MONTH FROM A.DT_VENCIMENTO), EXTRACT(YEAR FROM ' +
+        'A.DT_VENCIMENTO)'
+      'ORDER BY EXTRACT(MONTH FROM A.DT_VENCIMENTO)')
+    Left = 632
     Top = 141
+    ParamData = <
+      item
+        Name = 'PDATAINI'
+        DataType = ftDate
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'PDATAFIM'
+        DataType = ftDate
+        ParamType = ptInput
+      end>
+    object qrContasPagarAPagarMES: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'MES'
+      Origin = 'MES'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qrContasPagarAPagarANO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'ANO'
+      Origin = 'ANO'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qrContasPagarAPagarVALOR_PAGAR: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'VALOR_PAGAR'
+      Origin = 'VALOR_PAGAR'
+      ProviderFlags = []
+      ReadOnly = True
+      currency = True
+      Precision = 18
+      Size = 2
+    end
   end
   object dsCompra: TDataSource
     DataSet = qrCompra
@@ -599,23 +787,71 @@
   end
   object dsContaReceber: TDataSource
     DataSet = qrContaReceber
-    Left = 752
+    Left = 736
     Top = 201
   end
   object dsContasPagarAPagar: TDataSource
     DataSet = qrContasPagarAPagar
-    Left = 643
+    Left = 635
     Top = 201
   end
   object dsContaReceberAReceber: TDataSource
     DataSet = qrContaReceberAReceber
-    Left = 504
+    Left = 496
     Top = 200
   end
   object qrContaReceberAReceber: TFDQuery
     Connection = DM.Conexao
-    Left = 504
-    Top = 136
+    SQL.Strings = (
+      'select'
+      '  extract(MONTH FROM A.DT_VENCIMENTO) AS MES,'
+      '  extract(YEAR FROM A.DT_VENCIMENTO) AS ANO,'
+      '  SUM(A.VALOR_PARCELA) AS TOTAL_PARCELA'
+      '  FROM CONTAS_RECEBER A'
+      '  WHERE A.DT_VENCIMENTO between :PDATAINI AND :PDATAFIM'
+      '  AND A.STATUS ='#39'EM ABERTO'#39
+      
+        '  group BY extract(MONTH FROM A.DT_VENCIMENTO),  extract(YEAR FR' +
+        'OM A.DT_VENCIMENTO)'
+      '  ORDER BY  extract(MONTH FROM A.DT_VENCIMENTO)')
+    Left = 496
+    Top = 144
+    ParamData = <
+      item
+        Name = 'PDATAINI'
+        DataType = ftDate
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'PDATAFIM'
+        DataType = ftDate
+        ParamType = ptInput
+      end>
+    object qrContaReceberAReceberMES: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'MES'
+      Origin = 'MES'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qrContaReceberAReceberANO: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'ANO'
+      Origin = 'ANO'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object qrContaReceberAReceberTOTAL_PARCELA: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'TOTAL_PARCELA'
+      Origin = 'TOTAL_PARCELA'
+      ProviderFlags = []
+      ReadOnly = True
+      currency = True
+      Precision = 18
+      Size = 2
+    end
   end
   object RelatórioGeral: TfrxReport
     Version = '6.9.3'
@@ -632,7 +868,7 @@
       'begin'
       ''
       'end.')
-    Left = 352
+    Left = 328
     Top = 280
     Datasets = <>
     Variables = <>
@@ -705,7 +941,7 @@
     PdfA = False
     PDFStandard = psNone
     PDFVersion = pv17
-    Left = 296
+    Left = 240
     Top = 280
   end
 end
