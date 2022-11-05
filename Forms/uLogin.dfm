@@ -243,8 +243,6 @@ object FrmLogin: TFrmLogin
     ParentFont = False
     TabOrder = 7
     VisualStyle = vsGradient
-    ExplicitLeft = 136
-    ExplicitTop = 8
     object Image1: TImage
       Left = 304
       Top = 104
